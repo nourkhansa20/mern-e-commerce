@@ -1,0 +1,20 @@
+ .grid-container {
+    display: grid;
+    gap: 6px 0px;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(1ex, 37ex));
+  }
+
+  /* Media Query for Large Screens */
+  @media (max-width: 1021px) {
+    .grid-container {
+      grid-template-columns: repeat(auto-fit, minmax(1ex, 21ex));
+
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid-container {
+      justify-content: center;
+    }
+  }
