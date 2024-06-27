@@ -7,14 +7,14 @@ const CustomNavBar = () => {
     return (
         <Navbar>
             <Navbar.Items withoutDirection className="justify-start">
-                <Navbar.Item className='text-white hover:text-primary transition-all duration-200'>
+                <Navbar.Item to='/home' className='text-white hover:text-primary transition-all duration-200'>
                     <Navbar.ItemText>HOME</Navbar.ItemText>
                 </Navbar.Item>
 
                 <Navbar.Item to={'/shop'} className='text-white hover:text-primary transition-all duration-200'>
                     <Navbar.ItemText>SHOP</Navbar.ItemText>
                     <Navbar.DropDown>
-                        nour
+                        nour ffsdf
                     </Navbar.DropDown>
                 </Navbar.Item>
             </Navbar.Items>

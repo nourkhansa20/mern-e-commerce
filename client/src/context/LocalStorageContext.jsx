@@ -10,7 +10,6 @@ const LocalStorageContext = createContext({
   deleteProduct: () => { },
 })
 
-
 export const LocalStorageContextProvider = ({ children }) => {
 
   const [products, setProducts] = useState(

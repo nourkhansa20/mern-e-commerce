@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
+import GuestLayout from './layouts/GuestLayout';
 import NotFound from './pages/NotFound';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -9,6 +10,7 @@ const ShopPage = lazy(() => import('./pages/ShopPage'));
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 const UserInfo = lazy(() => import('./pages/Profile/UserInfo'));
 const Setting = lazy(() => import('./pages/Profile/Setting'));
+const Login = lazy(() => import('./pages/Auth/Login/Login'));
 
 const SuspenseFallback = () => <div>Loading...</div>;
 
@@ -74,7 +76,17 @@ const router = createBrowserRouter([
             },
         ]
     },
-
+    {
+        path: '/',
+        element:
+            <GuestLayout />,
+        children: [
+            {
+                path: '/login',
+                element: <Login />,
+            },
+        ]
+    },
     {
         path: '*',
         element: <NotFound />,

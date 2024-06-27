@@ -2,6 +2,6 @@
 import api from "./api";
 
 export const fetchAllCategories = (config) =>
-    api.get(`products/categories`, config).then((res) => res.data);
+    api.get(`https://fakestoreapi.com/products/categories`, config).then((res) => res.data);
 
 

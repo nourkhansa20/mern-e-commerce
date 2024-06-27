@@ -56,4 +56,11 @@ export function getProductQuantityFromLocalStorage(product_id) {
     return product ? product.quantity : 0;
 }
 
+export function addItemToLocalStorage(place, item) {
+    localStorage.setItem(place, item);
+}
+
+export function getItemToLocalStorage(place) {
+    return localStorage.getItem(place);
+}
 

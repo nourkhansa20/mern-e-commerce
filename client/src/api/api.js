@@ -1,12 +1,24 @@
 import axios from "axios";
 
 const axiosParams = {
-  // Base URL should be set via environment
   baseURL:
-    "https://fakestoreapi.com/"
+    import.meta.env.VITE_API_BASE_URL
 };
 
 const axiosInstance = axios.create(axiosParams);
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const localStorageToken = localStorage.getItem('ACCESS_TOKEN');
+    if (localStorageToken) {
+      config.headers.Authorization = `Bearer ${localStorageToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const didAbort = (error) => axios.isCancel(error) && { aborted: true };
 
@@ -47,7 +59,7 @@ const withAbort = (fn) => {
 
 export const withLogger = async (promise) =>
   promise.catch((error) => {
-    if (!process.env.REACT_APP_DEBUG_API) throw error;
+    // if (!process.env.REACT_APP_DEBUG_API) throw error;
 
     if (error.response) {
       console.log(error.response.data);
@@ -61,6 +73,7 @@ export const withLogger = async (promise) =>
     console.log(error.config);
     throw error;
   });
+
 const api = (axios) => {
   return {
     get: (url, config = {}) => withLogger(withAbort(axios.get)(url, config)),

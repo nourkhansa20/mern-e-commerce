@@ -17,7 +17,7 @@ const ShopPage = () => {
                     label: 'Jackets',
                     subOptions: [
                         { label: 'Casual Jackets' },
-                        { label: 'Formal Jackets' }
+                        { label: 'Formal Jackets', subOptions: [{ label: "nour" }] }
                     ]
                 },
                 {
@@ -67,6 +67,7 @@ const ShopPage = () => {
 
     const getFilter = (data) => {
         navigate(`/shop?${data.query_params}`)
+        console.log(data)
     }
 
     const side_filter = () => {
