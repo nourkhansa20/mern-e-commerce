@@ -1,6 +1,6 @@
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import passport from 'passport';
-import { User } from '../database/modules/User.js';
+import { User } from '../database/models/User.js';
 
 const secretKey = 'your_jwt_secret_key'; // Use a strong secret key in production
 

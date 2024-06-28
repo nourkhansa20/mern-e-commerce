@@ -22,25 +22,25 @@ const NavbarItem = ({ children, className = 'bg-black bg-opacity-25 rounded-lg',
 };
 
 
-const NavbarIcon = ({ children }) => {
+const NavbarIcon = ({ className, children }) => {
   return (
-    <div>
+    <div className={className}>
       {children}
     </div>
   )
 }
 
-const NavbarItemText = ({ children }) => {
+const NavbarItemText = ({ className, children }) => {
   return (
-    <div>
+    <div className={className}>
       {children}
     </div>
   )
 }
 
-const NavbarItems = ({ children, withoutDirection }) => {
+const NavbarItems = ({ children, withoutDirection, className = 'flex gap-2 w-full ' }) => {
   return (
-    <div className={`flex gap-2 w-full 
+    <div className={`${className}
     ${withoutDirection ? '' : 'justify-end'}
     `}>
       {children}

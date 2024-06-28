@@ -83,7 +83,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/login',
-                element: <Login />,
+                element: (
+                    <Suspense fallback={<SuspenseFallback />}>
+                        <Login />
+                    </Suspense>
+                )
             },
         ]
     },

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 
 export const partialComponent = (Component, partialProps) => {
     return props => {
@@ -5,15 +6,34 @@ export const partialComponent = (Component, partialProps) => {
     }
 }
 
-export const Button = ({ size, color, className, onClick, children, withoutWidth, ...props }) => {
+export const Button = ({ size, color, className, onClick, children, withoutWidth, isLoading = false, ...props }) => {
+    const [disabled, setDisabled] = useState()
+    useEffect(() => {
+        isLoading ? setDisabled('disabled') : setDisabled('')
+    }, [isLoading])
+
     return (
-        <div onClick={onClick} className={`p-2 flex justify-center gap-2 rounded-md font-semibold border-primary cursor-pointer
-        ${withoutWidth ? 'w-full py-5' : 'py-3 '}
+        <div className={`p-2 flex justify-center gap-2 rounded-md font-semibold border-primary cursor-pointer
+        ${withoutWidth ? 'w-full py-5' : 'py-3 w-[15ex] md:w-[30ex] '} 
         ${className}`}>
             <button
                 {...props}
+                disabled={disabled}
+                onClick={onClick}
+                className="w-full h-full"
             >
-                {children}
+
+                {
+                    isLoading ? (
+                        <>Loading...</>
+                    ) : (
+                        <>
+                            {children}
+                        </>
+                    )
+
+                }
+
             </button>
         </div>
     )

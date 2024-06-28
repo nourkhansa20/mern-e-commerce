@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosParams = {
   baseURL:
-    import.meta.env.VITE_API_BASE_URL
+    `${import.meta.env.VITE_API_BASE_URL}/api`
 };
 
 const axiosInstance = axios.create(axiosParams);
@@ -57,35 +57,52 @@ const withAbort = (fn) => {
   return executor;
 };
 
-export const withLogger = async (promise) =>
-  promise.catch((error) => {
-    // if (!process.env.REACT_APP_DEBUG_API) throw error;
+// export const withLogger = async (promise) =>
+//   promise.catch((error) => {
+//     // if (!process.env.REACT_APP_DEBUG_API) throw error;
 
-    if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      console.log(error.request);
-    } else {
-      console.log("Error", error.message);
-    }
-    console.log(error.config);
-    throw error;
-  });
+//     if (error.response) {
+//       console.log(error.response.data);
+//       console.log(error.response.status);
+//       console.log(error.response.headers);
+//     } else if (error.request) {
+//       console.log(error.request);
+//     } else {
+//       console.log("Error", error.message);
+//     }
+//     console.log(error.config);
+//     throw error;
+//   });
 
 const api = (axios) => {
   return {
-    get: (url, config = {}) => withLogger(withAbort(axios.get)(url, config)),
+    get: (url, config = {}) => withAbort(axios.get)(url, config),
     delete: (url, config = {}) =>
-      withLogger(withAbort(axios.delete)(url, config)),
+      withAbort(axios.delete)(url, config),
     post: (url, body, config = {}) =>
-      withLogger(withAbort(axios.post)(url, body, config)),
+      withAbort(axios.post)(url, body, config),
     patch: (url, body, config = {}) =>
-      withLogger(withAbort(axios.patch)(url, body, config)),
+      withAbort(axios.patch)(url, body, config),
     put: (url, body, config = {}) =>
-      withLogger(withAbort(axios.put)(url, body, config)),
+      withAbort(axios.put)(url, body, config),
   };
 };
+
+
+//with Logger
+
+// const api = (axios) => {
+//   return {
+//     get: (url, config = {}) => withLogger(withAbort(axios.get)(url, config)),
+//     delete: (url, config = {}) =>
+//       withLogger(withAbort(axios.delete)(url, config)),
+//     post: (url, body, config = {}) =>
+//       withLogger(withAbort(axios.post)(url, body, config)),
+//     patch: (url, body, config = {}) =>
+//       withLogger(withAbort(axios.patch)(url, body, config)),
+//     put: (url, body, config = {}) =>
+//       withLogger(withAbort(axios.put)(url, body, config)),
+//   };
+// };
 
 export default api(axiosInstance);

@@ -29,7 +29,7 @@ export const Toast = ({ id, message, type, duration, onRemove }) => {
     };
 
     return (
-        <div className={`toast flex flex-col justify-between items-start p-4 mb-4 rounded text-white shadow-lg ${typeStyles[type]}`}>
+        <div className={`toast w-[30ex] flex flex-col justify-between items-start p-4 mb-4 rounded text-white shadow-lg ${typeStyles[type]}`}>
             <div className="flex justify-between w-full items-center">
                 <span>{message}</span>
                 <button onClick={handleRemove} className="ml-4 bg-transparent border-0 text-white cursor-pointer">X</button>

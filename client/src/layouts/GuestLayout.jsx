@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAuthContext } from '../context/useAuthContext'
 
 const GuestLayout = () => {
-    const { token } = useAuthContext()
+    const { isAuth } = useAuthContext()
 
-    if (token) {
-        console.log(token)
+    if (isAuth) {
         return <Navigate to={'/home'} />
     }
 
     return (
         <div>
+            <div className='hidden'>{isAuth}</div>
             <Outlet />
         </div>
     )

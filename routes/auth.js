@@ -2,7 +2,8 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { User } from '../database/modules/User.js';
+import { User } from '../database/models/User.js';
+import authenticateJWT from '../middleware/authMiddleware.js'
 
 const router = express.Router();
 const secretKey = 'your_jwt_secret_key'; // Use a strong secret key in production
@@ -50,6 +51,10 @@ router.post('/register', async (req, res) => {
     console.error(error);
     res.status(500).send('Error registering user');
   }
+});
+
+router.post('/validate-token', authenticateJWT, (req, res) => {
+  res.send({ message: "ddd" })
 });
 
 export default router;

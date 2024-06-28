@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -13,7 +13,9 @@ const schema = yup.object({
 });
 
 const LoginFrom = () => {
-    const { loginMutation, setUser, setToken } = useAuthContext()
+    const { loginMutation, setUser, setToken, loadingAuth } = useAuthContext()
+    const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
 
     const form = useForm({
         defaultValues: {
@@ -27,11 +29,14 @@ const LoginFrom = () => {
 
     const { errors } = formState
 
-    const onSubmit = (data) => {
-        loginMutation.mutate(data, {
+    const onSubmit = async (data) => {
+        setIsLoading(true)
+        await loginMutation.mutateAsync(data, {
             onSuccess: (data) => {
                 setUser(data.data.user)
                 setToken(data.data.token)
+                setIsLoading(false)
+                // navigate('/home')
             },
             onError: (error) => {
                 console.error('Error posting data:', error);
@@ -42,7 +47,7 @@ const LoginFrom = () => {
     const onError = (data) => {
         console.log(data)
     }
-
+    console.log(loadingAuth)
     return (
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate className='h-full flex flex-col justify-between items-center gap-2'>
             <h2 className='font-semibold text-xl mb-3 mt-2'>Login</h2>
@@ -60,8 +65,7 @@ const LoginFrom = () => {
                 error={errors.password?.message}
                 {...register('password')}
             />
-
-            <PrimaryButton className={'w-[20ex]'}>Create</PrimaryButton>
+            <PrimaryButton className={'w-[20ex]'} isLoading={isLoading || loadingAuth}>Login</PrimaryButton>
 
         </form>
     )

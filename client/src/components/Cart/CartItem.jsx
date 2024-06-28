@@ -38,10 +38,12 @@ const CartItem = ({ product, onRemove }) => {
                     <p>${product.price}</p>
                 </div>
                 <table className='text-gray-400 text-[1.2ex] md:text-[1.4ex]'>
-                    <tr>
-                        <td className='py-1'>Product no</td>
-                        <td className='py-1'>{product.id}</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td className='py-1'>Product no</td>
+                            <td className='py-1'>{product.id}</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <div className='flex justify-between items-center min-w-full'>
                     <LikeButton className={'w-[2.4ex] sm:w-[3ex]'} />
