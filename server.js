@@ -12,8 +12,11 @@ import authRoutes from './routes/auth.js'; // Correct the path
 import usersRoutes from './routes/users.js'; // Correct the path
 import productsRoutes from './routes/products.js'; // Correct the path
 import categoriesRoutes from './routes/categories.js'; // Correct the path
+import fieldsRoutes from './routes/fields.js'; // Correct the path
 
 import './database/database.js'
+
+import { adminRouter, admin } from './adminjs/adminJS.js'
 
 dotenv.config()
 
@@ -32,16 +35,20 @@ app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
 
-app.use('/api/auth', authRoutes); // Use the auth routes
-app.use('/api/users', usersRoutes); // Use the users routes
-app.use('/api/products', productsRoutes); // Use the auth routes
-app.use('/api/categories', categoriesRoutes); // Use the users routes
+app.use('/api/auth', authRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/categories', categoriesRoutes);
+app.use('/api/fields', fieldsRoutes);
 
 // Use the Client app
 app.use(express.static(path.join(__dirname, '/client/dist')))
 
 // To access te images
 app.use('/img', express.static(path.join(__dirname, 'public/images')));
+
+// Use admin js
+// app.use(admin.options.rootPath, adminRouter)
 
 // Render client for any path
 app.get('*', (req, res) => {

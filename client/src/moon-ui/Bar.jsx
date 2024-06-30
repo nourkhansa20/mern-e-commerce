@@ -1,9 +1,8 @@
 import React, { useState, cloneElement, Children, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
-const NavbarItem = ({ children, className = 'bg-black bg-opacity-25 rounded-lg', withoutRound, withoutBackgroudColor, to }) => {
+const BarItem = ({ children, className = 'bg-black bg-opacity-25 rounded-lg', withoutRound, withoutBackgroudColor, to }) => {
   const [entered, setEntered] = useState(false);
-
   // Clone children to pass the entered state to them
   const clonedChildren = Children.map(children, child =>
     cloneElement(child, { entered })
@@ -22,7 +21,7 @@ const NavbarItem = ({ children, className = 'bg-black bg-opacity-25 rounded-lg',
 };
 
 
-const NavbarIcon = ({ className, children }) => {
+const BarIcon = ({ className, children }) => {
   return (
     <div className={className}>
       {children}
@@ -30,7 +29,7 @@ const NavbarIcon = ({ className, children }) => {
   )
 }
 
-const NavbarItemText = ({ className, children }) => {
+const BarItemText = ({ className, children }) => {
   return (
     <div className={className}>
       {children}
@@ -38,9 +37,21 @@ const NavbarItemText = ({ className, children }) => {
   )
 }
 
-const NavbarItems = ({ children, withoutDirection, className = 'flex gap-2 w-full ' }) => {
+const BarItems = ({ children, withoutDirection, className = 'flex gap-2 w-full ', type }) => {
+
+  const [typeStyle, setTypeStyle] = useState('')
+
+  useEffect(() => {
+    if (type == 'side') {
+      setTypeStyle('flex-col')
+    } else if (type == 'nav') {
+      setTypeStyle('flex-row')
+    }
+  }, [type])
+
+
   return (
-    <div className={`${className}
+    <div className={`${className} ${typeStyle}
     ${withoutDirection ? '' : 'justify-end'}
     `}>
       {children}
@@ -48,7 +59,7 @@ const NavbarItems = ({ children, withoutDirection, className = 'flex gap-2 w-ful
   )
 }
 
-const NavbarLogo = ({ children }) => {
+const BarLogo = ({ children }) => {
   return (
     <div className=''>
       {children}
@@ -56,7 +67,7 @@ const NavbarLogo = ({ children }) => {
   )
 }
 
-const NavbarDropDown = ({ entered, children }) => {
+const BarDropDown = ({ entered, children }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -76,19 +87,34 @@ const NavbarDropDown = ({ entered, children }) => {
   );
 };
 
-const Navbar = ({ children, className = '' }) => {
+const Bar = ({ children, className = '', type = 'nav' }) => {
+  const [typeStyle, setTypeStyle] = useState('')
+
+  useEffect(() => {
+    if (type == 'side') {
+      setTypeStyle('h-full z-40 flex-col w-[30ex]')
+    } else if (type == 'nav') {
+      setTypeStyle('z-40 flex-row')
+    }
+
+  }, [type])
+
+  const clonedChildren = Children.map(children, child =>
+    cloneElement(child, { type })
+  );
+
   return (
-    <div className={`bg-secondary py-2 px-4 flex items-center ${className}`}>
-      {children}
+    <div className={`bg-secondary py-2 px-4 flex items-center ${className} ${typeStyle} `}>
+      {clonedChildren}
     </div>
   )
 }
 
-export default Navbar
+export default Bar
 
-Navbar.ItemText = NavbarItemText
-Navbar.Item = NavbarItem
-Navbar.Items = NavbarItems
-Navbar.Icon = NavbarIcon
-Navbar.Logo = NavbarLogo
-Navbar.DropDown = NavbarDropDown
+Bar.ItemText = BarItemText
+Bar.Item = BarItem
+Bar.Items = BarItems
+Bar.Icon = BarIcon
+Bar.Logo = BarLogo
+Bar.DropDown = BarDropDown

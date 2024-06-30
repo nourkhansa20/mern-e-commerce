@@ -1,63 +1,63 @@
 import React, { useState } from 'react'
-import Navbar from '../../moon-ui/Navbar'
+import Bar from '../../moon-ui/Bar'
 import CartDrawer from '../Cart/CartDrawer'
 import CartIconComponent from '../Cart/CartIconComponent'
 import UserIcon from '../../moon-ui/icons/UserIcon'
 import { useAuthContext } from '../../context/useAuthContext'
 
-const CustomNavBar = () => {
+const CustomBar = () => {
     const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false)
     const { isAuth } = useAuthContext()
-    console.log(isAuth)
+    
     return (
-        <Navbar>
-            <Navbar.Items withoutDirection className="flex justify-start">
-                <Navbar.Item to='/home' className='text-white hover:text-primary transition-all duration-200'>
-                    <Navbar.ItemText>HOME</Navbar.ItemText>
-                </Navbar.Item>
+        <Bar>
+            <Bar.Items withoutDirection className="flex justify-start">
+                <Bar.Item to='/home' className='text-white hover:text-primary transition-all duration-200'>
+                    <Bar.ItemText>HOME</Bar.ItemText>
+                </Bar.Item>
 
-                <Navbar.Item to={'/shop'} className='text-white hover:text-primary transition-all duration-200'>
-                    <Navbar.ItemText>SHOP</Navbar.ItemText>
-                    <Navbar.DropDown>
+                <Bar.Item to={'/shop'} className='text-white hover:text-primary transition-all duration-200'>
+                    <Bar.ItemText>SHOP</Bar.ItemText>
+                    <Bar.DropDown>
                         nour ffsdf
-                    </Navbar.DropDown>
-                </Navbar.Item>
-            </Navbar.Items>
+                    </Bar.DropDown>
+                </Bar.Item>
+            </Bar.Items>
 
-            <Navbar.Items className=' flex gap-4 w-full'>
-                <Navbar.Icon className='flex items-center justify-center'>
+            <Bar.Items className=' flex gap-4 w-full'>
+                <Bar.Icon className='flex items-center justify-center'>
                     <CartIconComponent onClick={() => setIsCartDrawerOpen(true)} />
                     <CartDrawer open={isCartDrawerOpen} onClose={() => setIsCartDrawerOpen(false)} />
-                </Navbar.Icon>
+                </Bar.Icon>
 
                 {
                     isAuth ?
                         (
-                            <Navbar.Item to={'/profile/user-info'} className=''>
-                                <Navbar.ItemText>
+                            <Bar.Item to={'/profile/user-info'} className=''>
+                                <Bar.ItemText>
                                     <UserIcon className='w-7 fill-white hover:fill-primary transition-all duration-300' />
-                                </Navbar.ItemText>
-                            </Navbar.Item>
+                                </Bar.ItemText>
+                            </Bar.Item>
 
                         ) : (
-                            <Navbar.Item to={'/login'} className=''>
-                                <Navbar.ItemText className='text-white'>
+                            <Bar.Item to={'/login'} className=''>
+                                <Bar.ItemText className='text-white'>
                                     Login
-                                </Navbar.ItemText>
-                            </Navbar.Item>
+                                </Bar.ItemText>
+                            </Bar.Item>
                         )
                 }
 
-            </Navbar.Items>
+            </Bar.Items>
 
-        </Navbar>
+        </Bar>
     )
 }
 
-export default CustomNavBar
+export default CustomBar
 
 
-const NavbarSection = ({ section }) => {
+const BarSection = ({ section }) => {
     return (
         <div>
             <h2>{section.title}</h2>
