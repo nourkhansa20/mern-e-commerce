@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-const Drawer = ({ open = false, onClose, children, z_index = 'z-30', position = 'left', className, size = null, customStyle }) => {
+const Drawer = ({ open = false, onClose, children, z_index = 'z-40', position = 'left', className, size = null, customStyle }) => {
   const [style, setStyle] = useState({})
   const [visibility, setVisibility] = useState('hidden')
   useEffect(() => {

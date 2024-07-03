@@ -1,6 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import api from '../api/api';
-import { addItemToLocalStorage, getItemToLocalStorage } from '../helpers/localStorageHelper';
 
 const apiUrl = '/users';
 

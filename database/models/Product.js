@@ -7,6 +7,7 @@ const productSchema = new Schema({
   images: [{ type: String }], // Array of image URLs or paths
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true }, // Reference to Category collection
   stockQuantity: { type: Number, default: 0 },
+  rate: { type: Number, default: 0 },
   discount: {
     amount: { type: Number, default: 0 }, // Discount amount
     startDate: { type: Date }, // Discount start date

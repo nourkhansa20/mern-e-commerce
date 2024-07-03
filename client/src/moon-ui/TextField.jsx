@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 
-const TextField = forwardRef(({ label, error, className, inputClassName, id, type = 'text', readOnly, ...props }, ref) => {
+export const FilledTextField = forwardRef(({ label, error, className, inputClassName, id, type = 'text', readOnly, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     const [value, setValue] = useState(props.defaultValue);
 
@@ -21,11 +21,11 @@ const TextField = forwardRef(({ label, error, className, inputClassName, id, typ
 
     return (
         <div className='w-full'>
-            <label className={`relative w-full block group  ${className}`} htmlFor={id}>
+            <label className={`relative w-full block group`} htmlFor={id}>
                 <input
                     id={id}
                     name={props.name ? props.name : ''}
-                    className={`${inputClassName} ${error ? 'border-red-400' : ' border-gray-300'} w-full`}
+                    className={`${inputClassName} input text-black w-full py-[1.9ex] pl-2 pr-1 outline-none border rounded-lg  ${error ? 'border-red-400' : ' border-gray-300'} w-full`}
                     type={type}
                     onFocus={handleFocus}
                     onBlur={(e) => {
@@ -55,8 +55,25 @@ const TextField = forwardRef(({ label, error, className, inputClassName, id, typ
     );
 });
 
-export const FilledTextField = forwardRef(({ ...props }, ref) => {
-    return <TextField inputClassName={`input text-black w-full py-[1.9ex] pl-2 pr-1 outline-none border rounded-lg `} ref={ref} {...props} />
+export const TextField = forwardRef(({ label, error, className, spanClassNames, inputClassName, id, type = 'text', readOnly, ...props }, ref) => {
+    return (
+        <div className='w-full '>
+            <label className={`relative w-full group mb-2`} htmlFor={id}>
+                <span className={`font-semibold text-sm ${spanClassNames}`}>{label}</span>
+                <input
+                    id={id}
+                    name={props.name ? props.name : ''}
+                    className={`${inputClassName} input text-black w-full py-[1.9ex] pl-2 pr-1 outline-none border rounded-lg  ${error ? 'border-red-400' : ' border-gray-300'} w-full`}
+                    type={type}
+                    ref={ref} // Forward the ref to the input element
+                    // value={value}
+                    readOnly={readOnly}
+                    {...props}
+                />
+            </label>
+            <p className='text-red-400 text-sm'>{error ? error : ''}</p>
+        </div>
+    )
 });
 
 // export const StandardTextField = forwardRef(({ label, error, className, id, type = 'text', ...props }, ref) => {

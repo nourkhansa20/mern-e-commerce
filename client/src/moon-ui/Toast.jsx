@@ -29,14 +29,14 @@ export const Toast = ({ id, message, type, duration, onRemove }) => {
     };
 
     return (
-        <div className={`toast w-[30ex] flex flex-col justify-between items-start p-4 mb-4 rounded text-white shadow-lg ${typeStyles[type]}`}>
+        <div className={`toast w-[30ex] flex flex-col justify-between items-start p-4 mb-4 rounded text-white shadow-lg z-50 ${typeStyles[type]}`}>
             <div className="flex justify-between w-full items-center">
                 <span>{message}</span>
                 <button onClick={handleRemove} className="ml-4 bg-transparent border-0 text-white cursor-pointer">X</button>
             </div>
             <div className="relative w-full h-1 mt-2 bg-gray-200 rounded">
                 <div
-                    className="absolute top-0 left-0 h-full bg-gray-500"
+                    className="absolute top-0 left-0 h-full bg-gray-500  " 
                     style={{ width: `${progress}%`, transition: 'width 0.1s linear' }}
                 ></div>
             </div>
@@ -60,7 +60,7 @@ export const ToastProvider = ({ children }) => {
 
     return (
         <ToastContext.Provider value={addToast}>
-            <div className="toast-container fixed top-5 right-5 flex flex-col items-end gap-4">
+            <div className="toast-container fixed top-5 right-5 flex flex-col items-end gap-4 z-50">
                 {toasts.map((toast) => (
                     <Toast key={toast.id} {...toast} onRemove={removeToast} />
                 ))}

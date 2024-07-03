@@ -3,16 +3,18 @@ import ResponsiveGrid from '../../moon-ui/ResponsiveGrid'
 import ItemCard from '../ItemCard/ItemCard'
 import { useQuery } from 'react-query'
 import SkeletonProductContainer from './SkeletonProductContainer'
-import { fetchAllProducts, fetchProductsByCategory } from '../../api/productApi'
+import { useProducts } from '../../hooks/useProductApi'
 
 const ProductsContainer = ({ category_name = '', limit = 0, containerClassName }) => {
-    const { data, isLoading, isError, isFetching } = useQuery(['category', category_name], () => {
-        if (category_name) {
-            return fetchProductsByCategory(category_name)
-        } else {
-            return fetchAllProducts()
-        }
-    });
+    // const { data, isLoading, isError, isFetching } = useQuery(['products', category_name], () => {
+    //     if (category_name) {
+    //         return fetchProductsByCategory(category_name)
+    //     } else {
+    //         return fetchAllProducts()
+    //     }
+    // });
+
+    const { data, isFetching, isError, isLoading } = useProducts()
 
     if (isLoading || isFetching) {
         return <SkeletonProductContainer />
@@ -26,12 +28,12 @@ const ProductsContainer = ({ category_name = '', limit = 0, containerClassName }
 
             {limit > 0 &&
                 data.map((product, index) => (index < limit) && (
-                    <ItemCard  key={product.id} product={product} />
+                    <ItemCard key={product._id} product={product} />
                 ))
             }
             {limit == 0 &&
                 data.map((product, index) => (
-                    <ItemCard key={product.id} product={product} />
+                    <ItemCard key={product._id} product={product} />
                 ))
             }
         </ResponsiveGrid>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import classnames from 'classnames';
 
-const Carousel = ({ images = [], interval = 10000, showGallery = false, showIndicators = true, autoPlay = false, className = '', imageContainerClassName = 'h-full', imageClassName = 'object-cover' }) => {
+const Carousel = ({ images = [], baseUrl = '', interval = 10000, showGallery = false, showIndicators = true, autoPlay = false, className = '', imageContainerClassName = 'h-full', imageClassName = 'object-cover' }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [arrowsVisible, setArrowsVisible] = useState(false);
     const intervalRef = useRef();
@@ -121,7 +121,7 @@ const Carousel = ({ images = [], interval = 10000, showGallery = false, showIndi
                 >
                     {images.map((image, index) => (
                         <img
-                            src={image}
+                            src={`${baseUrl}${image}`}
                             key={index}
                             className={`w-full flex-shrink-0 cursor-grab rounded-md object-contain ${imageClassName}`}
                             // style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -156,7 +156,7 @@ const Carousel = ({ images = [], interval = 10000, showGallery = false, showIndi
                 <div className="flex justify-center max-w-full items-center mt-4 space-x-2 overflow-auto ">
                     {images.map((image, index) => (
                         <img
-                            src={image}
+                            src={`${baseUrl}${image}`}
                             key={index}
                             className="min-w-20 h-20 object-contain cursor-pointer"
                             onClick={() => handleImageClick(index)}

@@ -92,9 +92,9 @@ const Bar = ({ children, className = '', type = 'nav' }) => {
 
   useEffect(() => {
     if (type == 'side') {
-      setTypeStyle('h-full z-40 flex-col w-[30ex]')
+      setTypeStyle('h-full z-30 flex-col w-[30ex]')
     } else if (type == 'nav') {
-      setTypeStyle('z-40 flex-row')
+      setTypeStyle('z-30 flex-row')
     }
 
   }, [type])

@@ -16,7 +16,7 @@ const Cart = () => {
             <List noPadding>
                 {
                     products.map(product => (
-                        <List.ListItem key={product.id}>
+                        <List.ListItem key={product._id}>
                             <CartItem product={product} onRemove={handleRemove} />
                         </List.ListItem>
                     ))

@@ -15,7 +15,8 @@ const Login = lazy(() => import('./pages/Auth/Login/Login'));
 
 // BackOffice Components
 const Dashboard = lazy(() => import('./backoffice/pages/Dashboard'))
-const Product = lazy(() => import('./backoffice/pages/Product'))
+const Product = lazy(() => import('./backoffice/pages/Product/Product'))
+const CreateProduct = lazy(() => import('./backoffice/pages/Product/CreateProduct'))
 const User = lazy(() => import('./backoffice/pages/User'))
 
 const SuspenseFallback = () => <div>Loading...</div>;
@@ -112,6 +113,14 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <Product />
+                    </Suspense>
+                ),
+            },
+            {
+                path: 'products/new',
+                element: (
+                    <Suspense fallback={<SuspenseFallback />}>
+                        <CreateProduct />
                     </Suspense>
                 )
             },

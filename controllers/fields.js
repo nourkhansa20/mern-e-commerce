@@ -1,12 +1,14 @@
 import { Category } from "../database/models/Category.js";
 import { Product } from "../database/models/Product.js";
+import { User } from "../database/models/User.js";
 
 const models = {
     'product': Product,
     'category': Category,
+    'user': User,
 };
 
-export const getFields =(req, res) => {
+export const getFields = (req, res) => {
     const collectionName = req.params.collection_name;
 
     if (!collectionName) {
@@ -17,10 +19,13 @@ export const getFields =(req, res) => {
 
     if (model) {
         const schemaPaths = model.schema.paths;
-        console.log(schemaPaths)
+        // console.log(schemaPaths)
         const schemaFields = getSchemaFields(schemaPaths);
 
-        res.json(schemaFields);
+        res.json({
+            collectionName: collectionName.toLowerCase(),
+            fields: schemaFields
+        });
     } else {
         res.status(404).json({ error: 'Collection not found' });
     }
@@ -32,10 +37,11 @@ function getSchemaFields(schemaPaths) {
     for (let path in schemaPaths) {
         if (schemaPaths.hasOwnProperty(path)) {
             const pathType = schemaPaths[path].instance;
-            const subPaths = schemaPaths[path].schema?.paths;
-
-            if (subPaths) {
-                schemaFields[path] = getSchemaFields(subPaths);
+            const subPaths = schemaPaths[path]._presplitPath;
+            // console.log(schemaPaths[path])
+            if (subPaths.length > 1) {
+                console.log(subPaths)
+                // schemaFields[path] = getSchemaFields(subPaths);
             } else {
                 schemaFields[path] = pathType;
             }

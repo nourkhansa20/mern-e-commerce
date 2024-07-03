@@ -28,7 +28,7 @@ const ItemCardFooter = ({ product }) => {
             <hr />
             <div className=' py-2.5 flex justify-between items-center'>
                 {
-                    isProductExist(product.id) ? (
+                    isProductExist(product._id) ? (
                         <div className='flex items-center gap-2 group cursor-pointer' onClick={handleDeleteProduct}>
                             <DeleteIcon className={`fill-red-500 w-[2ex] lg:w-[2.5ex]`} />
                             <span className='text-[1ex] mt-0.5 lg:text-[1.6ex] text-red-500 font-semibold'>DELETE FROM CART</span>
