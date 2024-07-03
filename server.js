@@ -45,7 +45,7 @@ app.use('/api/fields', fieldsRoutes);
 app.use(express.static(path.join(__dirname, '/client/dist')))
 
 // To access te images
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, '/images')));
 
 // Use admin js
 // app.use(admin.options.rootPath, adminRouter)
