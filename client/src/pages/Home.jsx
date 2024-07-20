@@ -6,14 +6,13 @@ import TextOffer from '../components/TextOffer/TextOffer'
 import BannerHome from '../components/BannersHome/BannerHome'
 import Tab from '../moon-ui/Tab'
 import CustomTab from '../components/CustomTab/CustomTab'
-import { useQuery } from 'react-query'
-import { fetchAllCategories } from '../api/categoryApi'
+import { useCategories } from '../hooks/useCategoryApi'
 import ProductsContainer from '../components/ProductsContainer/ProductsContainer'
 import { capitalizeFirstLetter } from '../helpers/wordhelper'
 import SideFilter from '../moon-ui/SideFilter'
 
 const Home = () => {
-  const { data: categories, isLoading, isError, isFetching } = useQuery('categories', fetchAllCategories)
+  const { data: categories, isLoading, isError, isFetching } = useCategories()
 
   const images = [
     "http://plaza.roadthemes.com/sneaker/pub/media/Plazathemes/bannerslider/images/b/a/banner7-11.jpg",
@@ -21,7 +20,9 @@ const Home = () => {
     "http://plaza.roadthemes.com/sneaker/pub/media/Plazathemes/bannerslider/images/b/a/banner7-12.jpg",
   ];
 
-  if (isLoading) return <h1>lod</h1>
+  if (isLoading) return <h1>Loading ...</h1>
+
+  if(!categories) return <h1>NO category</h1>
 
   return (
     <>
@@ -34,26 +35,36 @@ const Home = () => {
 
         <BannerHome />
 
-        <ProductSection section_name={categories[0]} />
-        <ProductSection section_name={categories[1]} />
+        {/* {
+          categories.map((category, index) => (
+            <>
+              {
+                index == 3 && (<TextOffer>
+                  Today Offer: $20 OFF orders $300 or more with code
+                  <TextOffer.Highligth> “SNEAKER-002”</TextOffer.Highligth>
+                  + Free shipping on orders over $60!
+                  <TextOffer.Highligth> Offer Details</TextOffer.Highligth>
+                </TextOffer>)
+              }
 
-        <TextOffer>
-          Today Offer: $20 OFF orders $300 or more with code
-          <TextOffer.Highligth> “SNEAKER-002”</TextOffer.Highligth>
-          + Free shipping on orders over $60!
-          <TextOffer.Highligth> Offer Details</TextOffer.Highligth>
-        </TextOffer>
+              <ProductSection category={category} />
+            </>
+          ))
+        } */}
 
-        <ProductSection section_name={categories[2]} />
 
-        <CustomTab
+
+        <ProductSection category={categories[1]} />
+
+        {/* <CustomTab
           saparator={'/'}
           content='Typi non habent claritatem insitam est usus legentis in qui facit eorum claritatem, investigationes demonstraverunt lectores legere me lius quod legunt saepius.'
-        >
-          <Tab.child title={capitalizeFirstLetter(categories[0])}><ProductsContainer category_name={categories[0]} limit={5} /></Tab.child>
-          <Tab.child title={capitalizeFirstLetter(categories[3])}><ProductsContainer category_name={categories[3]} limit={5} /></Tab.child>
-          <Tab.child title={capitalizeFirstLetter(categories[1])}><ProductsContainer category_name={categories[1]} limit={5} /></Tab.child>
-        </CustomTab>
+        > */}
+          {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
+          {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
+          {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
+        {/* </CustomTab> */}
+        
       </div>
     </>
 

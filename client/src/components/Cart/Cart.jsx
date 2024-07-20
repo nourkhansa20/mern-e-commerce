@@ -1,29 +1,32 @@
-import React, { useState } from 'react'
-import CartItem from './CartItem'
-import List from '../../moon-ui/List'
-import { addProductToLocalStorageCart, getAllCartItemsFromLocalStorage } from '../../helpers/localStorageHelper'
-import { useLocalStorageContext } from '../../context/LocalStorageContext'
+import React, { useState, useEffect } from 'react';
+import CartItem from './CartItem';
+import List from '../../moon-ui/List';
+import { useLocalStorageContext } from '../../context/LocalStorageContext';
+import { useCart } from '../../hooks/useCartApi';
+import { useAuthContext } from '../../context/useAuthContext';
+import { useCartContext } from '../../context/CartContext';
 
 const Cart = () => {
-    const [cartItems, setCartItems] = useState([]);
-    const { products } = useLocalStorageContext()
 
-    const handleRemove = (productId) => {
-        setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
-    };
+    const { cartProducts } = useCartContext()
+    console.log(cartProducts)
     return (
-        <div>
-            <List noPadding>
-                {
-                    products.map(product => (
-                        <List.ListItem key={product._id}>
-                            <CartItem product={product} onRemove={handleRemove} />
-                        </List.ListItem>
-                    ))
-                }
-            </List>
-        </div>
-    )
-}
+        <>
+            {cartProducts ? (
+                <div>
+                    <List noPadding>
+                        {cartProducts.map(product => (
+                            <List.ListItem key={product.product._id}>
+                                <CartItem product={product.product} />
+                            </List.ListItem>
+                        ))}
+                    </List>
+                </div>
+            ) : (
+                <>No item</>
+            )}
+        </>
+    );
+};
 
-export default Cart
+export default Cart;

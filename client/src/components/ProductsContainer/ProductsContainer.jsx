@@ -5,16 +5,9 @@ import { useQuery } from 'react-query'
 import SkeletonProductContainer from './SkeletonProductContainer'
 import { useProducts } from '../../hooks/useProductApi'
 
-const ProductsContainer = ({ category_name = '', limit = 0, containerClassName }) => {
-    // const { data, isLoading, isError, isFetching } = useQuery(['products', category_name], () => {
-    //     if (category_name) {
-    //         return fetchProductsByCategory(category_name)
-    //     } else {
-    //         return fetchAllProducts()
-    //     }
-    // });
+const ProductsContainer = ({ category_name = '', price = '', limit = 0, containerClassName }) => {
 
-    const { data, isFetching, isError, isLoading } = useProducts()
+    const { data, isFetching, isError, isLoading } = useProducts(category_name, price)
 
     if (isLoading || isFetching) {
         return <SkeletonProductContainer />

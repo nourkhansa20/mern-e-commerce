@@ -13,6 +13,7 @@ import usersRoutes from './routes/users.js'; // Correct the path
 import productsRoutes from './routes/products.js'; // Correct the path
 import categoriesRoutes from './routes/categories.js'; // Correct the path
 import fieldsRoutes from './routes/fields.js'; // Correct the path
+import cartRoutes from './routes/cart.js'; // Correct the path
 
 import './database/database.js'
 
@@ -40,6 +41,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/categories', categoriesRoutes);
 app.use('/api/fields', fieldsRoutes);
+app.use('/api/cart', cartRoutes);
 
 // Use the Client app
 app.use(express.static(path.join(__dirname, '/client/dist')))

@@ -6,6 +6,8 @@ import { ToastProvider } from './moon-ui/Toast'
 import './index.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AuthContextProvider } from './context/useAuthContext'
+import { CartContextProvider } from './context/CartContext'
+import { LocalStorageContextProvider } from './context/LocalStorageContext'
 
 const queryClient = new QueryClient()
 
@@ -14,9 +16,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
         <AuthContextProvider>
-          <ToastProvider>
-            <RouterProvider router={router} />
-          </ToastProvider>
+          <LocalStorageContextProvider>
+            <CartContextProvider>
+              <ToastProvider>
+                <RouterProvider router={router} />
+              </ToastProvider>
+            </CartContextProvider>
+          </LocalStorageContextProvider>
         </AuthContextProvider>
       </ToastProvider>
     </QueryClientProvider>

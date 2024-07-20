@@ -4,6 +4,8 @@ import ItemCardFooter from './ItemCardFooter';
 import StarRating from '../../moon-ui/StarRating';
 import DiscountLabel from './DiscountLabel ';
 import { Link } from 'react-router-dom';
+import { useCheckProductInCart } from '../../hooks/useCartApi';
+
 const ItemCard = ({ product }) => {
 
     const discountPercantage = Number((100 * product.discount.amount) / product.price).toFixed(0)

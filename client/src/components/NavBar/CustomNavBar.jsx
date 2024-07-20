@@ -18,9 +18,6 @@ const CustomBar = () => {
 
                 <Bar.Item to={'/shop'} className='text-white hover:text-primary transition-all duration-200'>
                     <Bar.ItemText>SHOP</Bar.ItemText>
-                    <Bar.DropDown>
-                        nour ffsdf
-                    </Bar.DropDown>
                 </Bar.Item>
             </Bar.Items>
 

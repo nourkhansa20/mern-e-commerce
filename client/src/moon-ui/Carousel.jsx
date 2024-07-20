@@ -123,7 +123,7 @@ const Carousel = ({ images = [], baseUrl = '', interval = 10000, showGallery = f
                         <img
                             src={`${baseUrl}${image}`}
                             key={index}
-                            className={`w-full flex-shrink-0 cursor-grab rounded-md object-contain ${imageClassName}`}
+                            className={`w-full flex-shrink-0  rounded-md object-contain ${imageClassName}`}
                             // style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
                             onClick={() => handleImageClick(index)}
                         />

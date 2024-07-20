@@ -8,22 +8,27 @@ import SkeletonProductDetails from './SkeletonProductDetails';
 import { useLocalStorageContext } from '../../context/LocalStorageContext';
 import StarRating from '../../moon-ui/StarRating';
 import { useProduct } from '../../hooks/useProductApi';
+import { useCartContext } from '../../context/CartContext';
 
 const ProductDetails = ({ product }) => {
     const [currentProduct, setCurrentProduct] = useState(product);
-    const [quantity, setQuantity] = useState(0);
     const [priceAfterDiscount, setPriceAfterDiscount] = useState(null);
 
     const { product_slug } = useParams();
     const { data, isLoading, isSuccess, isError } = useProduct(product_slug);
-    const { addProduct, removeProduct, getProductQuantity, isProductExist, deleteProduct } = useLocalStorageContext();
+    // const { addProduct, removeProduct, getProductQuantity, isProductExist, deleteProduct } = useLocalStorageContext();
+    const { addProductToCart, removeProductFromCart, deleteProductFromCart, getProductQuantity, isProductInCart } = useCartContext()
+
+    const [quantity, setQuantity] = useState();
 
     useEffect(() => {
         if (product) {
             setCurrentProduct(product);
+            console.log(product)
             setQuantity(getProductQuantity(product._id));
         } else if (isSuccess && data) {
             setCurrentProduct(data);
+            console.log(data)
             setQuantity(getProductQuantity(data._id));
         }
     }, [product, isSuccess, data, getProductQuantity]);
@@ -43,18 +48,16 @@ const ProductDetails = ({ product }) => {
     }
 
     const handleAddProduct = () => {
-        addProduct(currentProduct);
-        setQuantity(prevQty => prevQty + 1);
+        addProductToCart(currentProduct);
     };
 
     const handleRemoveProduct = () => {
-        removeProduct(currentProduct._id);
-        setQuantity(prevQty => (prevQty > 0 ? prevQty - 1 : 0));
+        removeProductFromCart(currentProduct);
     };
 
     const handleDeleteProduct = () => {
-        deleteProduct(currentProduct._id);
-        setQuantity(0);
+        console.log(currentProduct)
+        deleteProductFromCart(currentProduct);
     };
 
     return (
@@ -103,7 +106,7 @@ const ProductDetails = ({ product }) => {
                             value={quantity}
                         />
                     </div>
-                    {isProductExist(currentProduct._id) ? (
+                    {isProductInCart(currentProduct._id) ? (
                         <PrimaryButton className='w-[30ex] py-4' onClick={handleDeleteProduct}>
                             REMOVE FROM CART
                         </PrimaryButton>

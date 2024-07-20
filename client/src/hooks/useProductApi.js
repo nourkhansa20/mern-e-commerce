@@ -1,10 +1,11 @@
 import api from '../api/api';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { jsonToQueryParams } from '../helpers/wordhelper';
 
 const apiUrl = '/products';
 
-const fetchProducts = async () => {
-    const { data } = await api.get(apiUrl);
+const fetchProducts = async (category_name = '', price = '') => {
+    const { data } = await api.get(`${apiUrl}?category_name=${category_name}&price=${price}`);
     return data;
 };
 
@@ -39,16 +40,15 @@ const uploadImages = async ({ id, images }) => {
     return response.data;
 };
 
-
 // Fetch all products
-export const useProducts = (category) => {
-    return useQuery(['products'], fetchProducts);
+export const useProducts = (category_name = '', price = '') => {
+    return useQuery(['products', category_name, price], () => fetchProducts(category_name, price));
 };
 
 // Fetch a single product by ID
 export const useProduct = (id) => {
     return useQuery(['product', id], () => fetchProductById(id), {
-        enabled: !!id, // Only run query if id is provided
+        enabled: !!id,
     });
 };
 

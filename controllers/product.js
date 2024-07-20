@@ -1,11 +1,11 @@
 // controllers/users.js
 import { Product } from '../database/models/Product.js';
+import { Category } from '../database/models/Category.js';
 
 // Create a new user
 export const createProduct = async (req, res) => {
     try {
         const product = new Product(req.body);
-        console.log(product)
         await product.save();
         res.status(201).send(product);
     } catch (error) {
@@ -13,10 +13,38 @@ export const createProduct = async (req, res) => {
     }
 }
 
-// Get all users
+// Get all products
 export const getProducts = async (req, res) => {
     try {
-        const products = await Product.find().populate('category');
+        const { category_name, price } = req.query;
+
+        let filter = {};
+
+        // Filter by category name
+        if (category_name) {
+            const category = await Category.findOne({ name: category_name });
+            if (category) {
+                filter.category = category._id;
+            } else {
+                // No category found with the given name
+                return res.status(200).send([]);
+            }
+        }
+
+        // Filter by price range
+        if (price) {
+            if (price === 'Under $50') {
+                filter.price = { $lt: 50 };
+            } else if (price === '$50 - $100') {
+                filter.price = { $gte: 50, $lt: 100 };
+            } else if (price === '$100 - $200') {
+                filter.price = { $gte: 100, $lt: 200 };
+            } else if (price === 'Upper $200') {
+                filter.price = { $gte: 200 };
+            }
+        }
+
+        const products = await Product.find(filter).populate('category');
         res.status(200).send(products);
     } catch (error) {
         res.status(500).send(error);

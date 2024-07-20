@@ -5,8 +5,8 @@ export function getAllCartItemsFromLocalStorage() {
 
 export function addProductToLocalStorageCart(product) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const productIndex = cart.findIndex(item => item._id === product._id);
-
+    const productIndex = cart.findIndex(item => item.product._id === product.product._id);
+    console.log( cart)
     if (productIndex !== -1) {
         cart[productIndex].quantity += 1;
     } else {
@@ -21,7 +21,7 @@ export function addProductToLocalStorageCart(product) {
 
 export function removeProductToLocalStorageCart(product_id) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const productIndex = cart.findIndex(item => item._id === product_id);
+    const productIndex = cart.findIndex(item => item.product._id === product_id);
 
     if (productIndex !== -1) {
         if (cart[productIndex].quantity > 1) {
@@ -36,8 +36,11 @@ export function removeProductToLocalStorageCart(product_id) {
 }
 
 export function deleteProductFromLocalStorageCart(product_id) {
+    console.log(product_id)
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const productIndex = cart.findIndex(item => item._id === product_id);
+    console.log(cart)
+    const productIndex = cart.findIndex(item => item.product._id === product_id);
+    console.log(productIndex)
     cart.splice(productIndex, 1);
 
     localStorage.setItem('cart', JSON.stringify(cart));

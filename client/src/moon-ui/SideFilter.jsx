@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 const SideFilter = ({ filters = [], sendFilter = () => { }, containerClassName = 'w-64 p-4 bg-white border rounded-lg shadow-md', groupClassName, optionClassName, titleClassName = 'text-xl font-bold mb-4', groupTitleClassName }) => {
 
+
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 
@@ -57,9 +58,9 @@ const SideFilter = ({ filters = [], sendFilter = () => { }, containerClassName =
     };
 
     useEffect(() => {
-        if (JSON.stringify(selectedOptions) !== JSON.stringify(initialOptionsRef.current)) {
-            sendFilter({ json: selectedOptions, query_params: jsonToQueryParams(selectedOptions) });
-        }
+        // if (JSON.stringify(selectedOptions) !== JSON.stringify(initialOptionsRef.current)) {
+        sendFilter({ json: selectedOptions, query_params: jsonToQueryParams(selectedOptions) });
+        // }
     }, [selectedOptions]);
 
     return (
@@ -117,8 +118,13 @@ const FilterOption = ({ option, onOptionChange, parentLabels, selectedOptions, s
 
     const handleChange = () => {
         if (type === 'unique') {
-            setSelectedOptions([option.label]);
-            onOptionChange(parentLabels[0], [option.label], type);
+            if (isChecked) {
+                setSelectedOptions([]);
+                onOptionChange(parentLabels[0], [], type);
+            } else {
+                setSelectedOptions([option.label]);
+                onOptionChange(parentLabels[0], [option.label], type);
+            }
         } else {
             if (isChecked) {
                 const updatedSelection = selectedOptions.filter(label => label !== option.label);
