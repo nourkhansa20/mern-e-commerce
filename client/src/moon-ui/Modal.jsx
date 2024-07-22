@@ -19,12 +19,11 @@ const Modal = ({ open = false, onClose, children, className = '' }) => {
                         <div
                             className={`rounded-md transition-all duration-500 bg-white shadow-md overflow-auto ${open ? 'opacity-100' : 'opacity-0'} ${className} 
                             p-3 z-30`}
-
                         >
                             <div className="w-full flex justify-end cursor-pointer" onClick={close}>
                                 <CloseIcon className="w-4 mr-1" />
                             </div>
-                            <div className="flex justify-between items-center flex-col">
+                            <div className={`flex justify-between items-center flex-col ${className} ` }>
                                 {children}
                             </div>
                         </div>

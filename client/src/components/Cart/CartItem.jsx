@@ -10,6 +10,7 @@ import { useCartContext } from '../../context/CartContext'
 const CartItem = ({ product }) => {
     const { addProductToCart, removeProductFromCart, getProductQuantity, deleteProductFromCart } = useCartContext()
     const quantity = getProductQuantity(product._id);
+    const productPriceAfterDiscount = parseFloat(product.price) - parseFloat(product.discount.amount)
 
     const handleAdd = () => {
         addProductToCart(product)
@@ -23,20 +24,28 @@ const CartItem = ({ product }) => {
         removeProductFromCart(product)
     }
 
-
     return (
         <>
             {
                 product &&
-                <div className='flex gap-3 w-[60ex]'>
+                <div className='flex gap-3 w-full'>
                     {
                         product.images && product.images.length > 0 &&
-                        <img src={`${import.meta.env.VITE_API_BASE_URL}/${product.images[0]}`} alt="img" className='h-[12ex] sm:h-[20ex] sm:w-[14ex] w-[9ex] object-contain' />
+                        <img src={`${import.meta.env.VITE_API_BASE_URL}/${product.images[0]}`} alt="img" className='h-[12ex] sm:h-[20ex] sm:min-w-[14ex] min-w-[9ex] sm:max-w-[14ex] max-w-[9ex] object-contain' />
                     }
                     <div className='flex flex-col gap-2 w-full justify-center'>
                         <div className='text-[1.4ex] sm:text-[1.8ex] font-semibold flex justify-between items-center '>
                             <h3 className='w-[23ex] line-clamp-2 '>{product.name}</h3>
-                            {product.price && <p>${product.price}</p>}
+                            {
+                                product.discount ? (
+                                    <div className='flex gap-2'>
+                                        <span className='font-semibold text-gray-400 line-through'>${product.price}</span>
+                                        <span>${productPriceAfterDiscount}</span>
+                                    </div>
+                                ) : (
+                                    product.price && <p>${product.price}</p>
+                                )
+                            }
                         </div>
                         <table className='text-gray-400 text-[1.2ex] md:text-[1.4ex]'>
                             <tbody>

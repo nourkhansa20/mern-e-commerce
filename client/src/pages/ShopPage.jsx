@@ -56,7 +56,7 @@ const ShopPage = () => {
         <SideFilter
             filters={filters}
             sendFilter={getFilter}
-            containerClassName={'lg:w-[27ex] h-fit border rounded-md border-[2px] border-gray-200 px-5 py-3'}
+            containerClassName={'lg:w-[27ex] h-fit md:border rounded-md md:border-[2px] border-gray-200 px-5 py-3 sticky md:top-20'}
             groupTitleClassName='mb-[0.80ex] text-[1.7ex] font-semibold'
             groupClassName={'my-3'}
             optionClassName={'text-sm'}
@@ -69,7 +69,7 @@ const ShopPage = () => {
             <Drawer size={30} open={isfilterDrawerOpen} onClose={() => setIsfilterDrawerOpen(prev => !prev)}>
                 {side_filter()}
             </Drawer>
-            <div className='md:block hidden'>
+            <div className='md:block hidden '>
                 {side_filter()}
             </div>
 

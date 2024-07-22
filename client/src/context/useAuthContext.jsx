@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { checkToken, login, logout as _logout } from "../api/authApi";
 import { useMutation } from 'react-query'
 import { addItemToLocalStorage, getItemToLocalStorage } from "../helpers/localStorageHelper";
+import { useUser } from "../hooks/useUserApi";
 
 const AuthContext = createContext({
     user: null,
@@ -10,11 +11,13 @@ const AuthContext = createContext({
     setToken: () => { },
     loginMutation: () => { },
     logout: () => { },
+    refetchUser: () => { },
     isAuth: null,
     loadingAuth: null,
 })
 
 export const AuthContextProvider = ({ children }) => {
+
     const [user, _setUser] = useState(() => {
         const userLocalStorage = getItemToLocalStorage('USER')
         return JSON.parse(userLocalStorage);
@@ -22,6 +25,10 @@ export const AuthContextProvider = ({ children }) => {
 
     const [isAuth, setIsAuth] = useState()
     const [loadingAuth, setLoadingAuth] = useState(false)
+
+    const { data: refetchedUser, refetch: _refetchUser } = useUser(user?._id || '')
+    const [trigger, setTrigger] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -58,6 +65,19 @@ export const AuthContextProvider = ({ children }) => {
         addItemToLocalStorage('ACCESS_TOKEN', token)
     }
 
+    const refetchUser = async () => {
+        await _refetchUser()
+        setTrigger(prev => !prev);
+        console.log(refetchedUser)
+    }
+
+    useEffect(() => {
+        if (trigger) {
+            setUser(refetchedUser)
+            setTrigger(false);
+        }
+    }, [trigger])
+
     return (
         <AuthContext.Provider value={{
             user,
@@ -68,6 +88,7 @@ export const AuthContextProvider = ({ children }) => {
             logout,
             isAuth,
             loadingAuth,
+            refetchUser,
         }}>
             {children}
         </AuthContext.Provider>

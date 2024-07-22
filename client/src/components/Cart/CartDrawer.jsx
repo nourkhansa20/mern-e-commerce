@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Drawer from '../../moon-ui/Drawer'
 import Cart from './Cart'
 
-const CartDrawer = ({ open, ...props }) => {
-
+const CartDrawer = ({ open, onClose, ...props }) => {
     const [width, setWidth] = useState({});
 
     useEffect(() => {
@@ -25,9 +24,9 @@ const CartDrawer = ({ open, ...props }) => {
     }, []);
 
     return (
-        <Drawer size={width} className={` ${open ? `p-1 sm:p-4` : 'p-0'}`} open={open} position='right' {...props} >
+        <Drawer size={width} className={` ${open ? `p-1 sm:px-4 sm:pt-4` : 'p-0'}`} open={open} position='right' onClose={onClose} {...props}>
             <h2 className='text-2xl sm:text-3xl font-semibold'>Cart</h2>
-            <Cart />
+            <Cart closeDrawer={onClose} />
         </Drawer>
     )
 }

@@ -10,7 +10,7 @@ const CustomBar = () => {
     const { isAuth } = useAuthContext()
     
     return (
-        <Bar>
+        <Bar className='sticky top-0'>
             <Bar.Items withoutDirection className="flex justify-start">
                 <Bar.Item to='/home' className='text-white hover:text-primary transition-all duration-200'>
                     <Bar.ItemText>HOME</Bar.ItemText>

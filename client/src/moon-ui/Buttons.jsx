@@ -6,7 +6,7 @@ export const partialComponent = (Component, partialProps) => {
     }
 }
 
-export const Button = ({ size, color, className, onClick, children, withoutWidth, isLoading = false, ...props }) => {
+export const Button = ({ size, color, className, width = 'h-12 w-[15ex] md:w-[30ex] ', onClick, children, withoutWidth, isLoading = false, ...props }) => {
     const [disabled, setDisabled] = useState()
     useEffect(() => {
         isLoading ? setDisabled('disabled') : setDisabled('')
@@ -14,7 +14,7 @@ export const Button = ({ size, color, className, onClick, children, withoutWidth
 
     return (
         <div className={`p-2 flex justify-center gap-2 rounded-md font-semibold border-primary cursor-pointer
-        ${withoutWidth ? 'w-full py-5' : 'py-3 w-[15ex] md:w-[30ex] '} 
+        ${width}
         ${className}`}>
             <button
                 {...props}
@@ -22,7 +22,6 @@ export const Button = ({ size, color, className, onClick, children, withoutWidth
                 onClick={onClick}
                 className="w-full h-full"
             >
-
                 {
                     isLoading ? (
                         <>Loading...</>

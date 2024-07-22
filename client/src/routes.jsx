@@ -12,6 +12,7 @@ const Profile = lazy(() => import('./pages/Profile/Profile'));
 const UserInfo = lazy(() => import('./pages/Profile/UserInfo'));
 const Setting = lazy(() => import('./pages/Profile/Setting'));
 const Login = lazy(() => import('./pages/Auth/Login/Login'));
+const CheckOut = lazy(() => import('./pages/CheckOut'));
 
 // BackOffice Components
 const Dashboard = lazy(() => import('./backoffice/pages/Dashboard'))
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <ShopPage />
+                    </Suspense>
+                ),
+            },
+            {
+                path: 'check-out',
+                element: (
+                    <Suspense fallback={<SuspenseFallback />}>
+                        <CheckOut />
                     </Suspense>
                 ),
             },

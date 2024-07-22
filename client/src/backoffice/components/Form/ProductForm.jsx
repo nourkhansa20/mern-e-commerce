@@ -20,7 +20,7 @@ const schema = yup.object().shape({
         amount: yup.number('').required("Discount amount is required").typeError('Amount must be a number'),
     })
 });
-const ProductForm = () => {
+const ProductForm = ({ onClick }) => {
 
     const navigate = useNavigate()
 
@@ -74,12 +74,11 @@ const ProductForm = () => {
                             addToast("Product added successfully", 'success', 2000)
                             navigate('/admin/products')
                             setIsLoading(false)
-
+                            onClick()
                         },
                         onError: (err) => {
-                            console.log(err)
+                            addToast(err.message, 'error', 2000)
                             setIsLoading(false)
-
                         }
                     })
                 }

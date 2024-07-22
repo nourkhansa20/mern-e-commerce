@@ -1,31 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import CartItem from './CartItem';
-import List from '../../moon-ui/List';
-import { useLocalStorageContext } from '../../context/LocalStorageContext';
-import { useCart } from '../../hooks/useCartApi';
-import { useAuthContext } from '../../context/useAuthContext';
-import { useCartContext } from '../../context/CartContext';
+import CartItemsList from './CartItemsList'
+import { Link } from 'react-router-dom'
+import { PrimaryButton } from '../../moon-ui/Buttons';
 
-const Cart = () => {
-
-    const { cartProducts } = useCartContext()
-    console.log(cartProducts)
+const Cart = ({ closeDrawer }) => {
     return (
-        <>
-            {cartProducts ? (
-                <div>
-                    <List noPadding>
-                        {cartProducts.map(product => (
-                            <List.ListItem key={product.product._id}>
-                                <CartItem product={product.product} />
-                            </List.ListItem>
-                        ))}
-                    </List>
-                </div>
-            ) : (
-                <>No item</>
-            )}
-        </>
+        <CartItemsList>
+            <Link to='/check-out' onClick={closeDrawer}>
+                <PrimaryButton>Check Out</PrimaryButton>
+            </Link>
+        </CartItemsList>
     );
 };
 

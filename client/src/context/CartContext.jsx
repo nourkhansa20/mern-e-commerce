@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { useLocalStorageContext } from "./LocalStorageContext";
 import { useAddItemToCart, useRemoveItemFromCart, useCart } from "../hooks/useCartApi";
 import { useAuthContext } from './useAuthContext';
-import debounce from 'lodash.debounce';
 
 const CartContext = createContext({
     cartProducts: null,
@@ -12,6 +11,9 @@ const CartContext = createContext({
     deleteProductFromCart: () => { },
     isProductInCart: () => { },
     getProductQuantity: () => { },
+    subTotal: null,
+    total: null,
+    totalDiscount: null,
 });
 
 export const CartContextProvider = ({ children }) => {
@@ -23,15 +25,35 @@ export const CartContextProvider = ({ children }) => {
     const removeFromCartMutation = useRemoveItemFromCart();
 
     const [cartProducts, setCartProducts] = useState([]);
+    const [subTotal, setSubtotal] = useState(0)
+    const [total, setTotal] = useState(0)
+    const [totalDiscount, setTotalDiscount] = useState(0)
 
     useEffect(() => {
         if (isAuth && cartProductsFromDatabase) {
             setCartProducts(cartProductsFromDatabase.items);
         } else {
-            console.log(products)
             setCartProducts(products);
         }
     }, [cartProductsFromDatabase, isAuth, products]);
+
+    useEffect(() => {
+        let totalDiscount = 0
+        let total = 0
+        let subTotal = 0
+
+        cartProducts.forEach(item => {
+            totalDiscount += item.product.discount.amount * item.quantity
+            subTotal += item.product.price * item.quantity
+        });
+
+        total = subTotal - totalDiscount
+
+        setSubtotal(subTotal)
+        setTotal(total)
+        setTotalDiscount(totalDiscount)
+
+    }, [cartProducts])
 
     const addProductToCart = async (product) => {
         const productPrice = product.price - product.discount.amount;
@@ -155,13 +177,14 @@ export const CartContextProvider = ({ children }) => {
     };
 
     const getProductQuantity = (productId) => {
-        console.log(productId)
-        let product = cartProducts.find((item) => item.product._id === productId)
-        console.log(product.quantity)
-        return product.quantity
-
+        try {
+            let product = cartProducts.find((item) => item.product._id === productId)
+            return product.quantity
+        } catch (error) {
+            return 0
+        }
     }
-    
+
     return (
         <CartContext.Provider value={{
             cartProducts,
@@ -171,6 +194,9 @@ export const CartContextProvider = ({ children }) => {
             deleteProductFromCart,
             isProductInCart,
             getProductQuantity,
+            total,
+            subTotal,
+            totalDiscount,
         }}>
             {children}
         </CartContext.Provider>

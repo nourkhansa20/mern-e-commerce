@@ -6,7 +6,7 @@ import { Footer } from '../components/Footer/Footer'
 const DefaultLayout = () => {
 
     return (
-            <div className='h-screen flex flex-col'>
+            <div className='min-h-screen flex flex-col'>
                 <CustomNavBar />
                 <Outlet />
                 <Footer className='mt-24'/>

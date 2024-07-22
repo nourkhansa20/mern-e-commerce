@@ -28,6 +28,11 @@ export const removeItemFromCart = async ({ userId, productId }) => {
     return data;
 };
 
+export const removeAllItemsFromCart = async (userId) => {
+    const { data } = await api.delete(`${cartUrl}/remove-all-items`, { data: { userId } });
+    return data;
+};
+
 const fetchProductInCart = async ({ userId, productId }) => {
     const { data } = await api.get(`${cartUrl}/${userId}/product/${productId}`);
     return data;
@@ -72,6 +77,15 @@ export const useRemoveItemFromCart = () => {
     return useMutation(removeItemFromCart, {
         onSuccess: () => {
             // queryClient.invalidateQueries(['cart']);
+        },
+    });
+};
+
+export const useRemoveAllItemsFromCart = () => {
+    const queryClient = useQueryClient();
+    return useMutation(removeAllItemsFromCart, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['cart']);
         },
     });
 };

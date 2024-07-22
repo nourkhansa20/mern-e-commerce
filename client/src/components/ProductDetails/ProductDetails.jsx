@@ -5,7 +5,6 @@ import NumberInput from '../../moon-ui/NumberInput';
 import LikeButton from '../../moon-ui/LikeButton';
 import { Link, useParams } from 'react-router-dom';
 import SkeletonProductDetails from './SkeletonProductDetails';
-import { useLocalStorageContext } from '../../context/LocalStorageContext';
 import StarRating from '../../moon-ui/StarRating';
 import { useProduct } from '../../hooks/useProductApi';
 import { useCartContext } from '../../context/CartContext';
@@ -16,7 +15,6 @@ const ProductDetails = ({ product }) => {
 
     const { product_slug } = useParams();
     const { data, isLoading, isSuccess, isError } = useProduct(product_slug);
-    // const { addProduct, removeProduct, getProductQuantity, isProductExist, deleteProduct } = useLocalStorageContext();
     const { addProductToCart, removeProductFromCart, deleteProductFromCart, getProductQuantity, isProductInCart } = useCartContext()
 
     const [quantity, setQuantity] = useState();
@@ -24,11 +22,9 @@ const ProductDetails = ({ product }) => {
     useEffect(() => {
         if (product) {
             setCurrentProduct(product);
-            console.log(product)
             setQuantity(getProductQuantity(product._id));
         } else if (isSuccess && data) {
             setCurrentProduct(data);
-            console.log(data)
             setQuantity(getProductQuantity(data._id));
         }
     }, [product, isSuccess, data, getProductQuantity]);

@@ -22,7 +22,7 @@ const Home = () => {
 
   if (isLoading) return <h1>Loading ...</h1>
 
-  if(!categories) return <h1>NO category</h1>
+  if (!categories) return <h1>NO category</h1>
 
   return (
     <>
@@ -35,7 +35,7 @@ const Home = () => {
 
         <BannerHome />
 
-        {/* {
+        {
           categories.map((category, index) => (
             <>
               {
@@ -50,9 +50,7 @@ const Home = () => {
               <ProductSection category={category} />
             </>
           ))
-        } */}
-
-
+        }
 
         <ProductSection category={categories[1]} />
 
@@ -60,11 +58,11 @@ const Home = () => {
           saparator={'/'}
           content='Typi non habent claritatem insitam est usus legentis in qui facit eorum claritatem, investigationes demonstraverunt lectores legere me lius quod legunt saepius.'
         > */}
-          {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
-          {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
-          {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
+        {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
+        {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
+        {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
         {/* </CustomTab> */}
-        
+
       </div>
     </>
 
