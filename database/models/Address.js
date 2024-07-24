@@ -8,6 +8,7 @@ const addressSchema = new Schema({
     floor: { type: Number, required: true },
     street: { type: String, required: true },
     postalCode: { type: Number, required: true },
+    deleted: { type: Number, default: 0 },
 });
 
 export const Address = model('Address', addressSchema);

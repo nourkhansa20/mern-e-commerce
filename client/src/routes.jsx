@@ -12,6 +12,7 @@ const Profile = lazy(() => import('./pages/Profile/Profile'));
 const UserInfo = lazy(() => import('./pages/Profile/UserInfo'));
 const Setting = lazy(() => import('./pages/Profile/Setting'));
 const Orders = lazy(() => import('./pages/Profile/Orders'));
+const Addresses = lazy(() => import('./pages/Profile/Addresses'));
 const Login = lazy(() => import('./pages/Auth/Login/Login'));
 const CheckOut = lazy(() => import('./pages/CheckOut'));
 
@@ -85,6 +86,14 @@ const router = createBrowserRouter([
                         element: (
                             <Suspense fallback={<SuspenseFallback />}>
                                 <Orders />
+                            </Suspense>
+                        ),
+                    },
+                    {
+                        path: 'addresses', // Corrected path
+                        element: (
+                            <Suspense fallback={<SuspenseFallback />}>
+                                <Addresses />
                             </Suspense>
                         ),
                     },

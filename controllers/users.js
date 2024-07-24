@@ -26,7 +26,11 @@ export const getUsers = async (req, res) => {
 // Get a user by ID
 export const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate('addresses');
+    const user = await User.findById(req.params.id).populate({
+      path: 'addresses',
+      match: { deleted: 0 }
+    });
+    console.log(user)
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(200).json(user);
   } catch (err) {

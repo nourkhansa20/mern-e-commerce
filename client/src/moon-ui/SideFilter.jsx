@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 
 const SideFilter = ({ filters = [], sendFilter = () => { }, containerClassName = 'w-64 p-4 bg-white border rounded-lg shadow-md', groupClassName, optionClassName, titleClassName = 'text-xl font-bold mb-4', groupTitleClassName }) => {
 
-
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
 

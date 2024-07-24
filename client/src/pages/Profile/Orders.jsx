@@ -46,13 +46,16 @@ const Orders = () => {
 
     return (
         <>
+            <div className='mb-5 flex justify-between'>
+                <h2 className='text-4xl font-semibold'>Orders</h2>
+            </div>
             <div className='hidden md:block'>
-                <Table headers={headres} data={tableOrders} unvisibleColumn={'0'} headerClassName='text-[1.7ex] p-2' tableClassName={'w-full'} />
+                <Table headers={headres} data={tableOrders} rowsPerPage={20} unvisibleColumn={'0'} headerClassName='text-[1.7ex] p-2' tableClassName={'w-full'} />
             </div>
             <div className='flex flex-col gap-3 md:hidden '>
                 {
                     tableOrders.map((order) => (
-                        <div className='flex justify-around p-1 rounded-md shadow-md'>
+                        <div className='flex justify-around rounded-md border-[1px] border-gray-200 px-5 py-3'>
                             <table className='text-center text-sm'>
                                 <tbody>
                                     <tr>
@@ -105,6 +108,6 @@ const StatusComponent = ({ type, text, className = 'px-3 py-1' }) => {
     }, [type])
 
     return (
-        <div className={`${style} rounded-md text-center  ${className}`}>{text}</div>
+        <div className={`${style} rounded-md text-center ${className}`}>{text}</div>
     )
 }

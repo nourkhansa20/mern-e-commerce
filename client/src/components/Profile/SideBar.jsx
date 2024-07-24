@@ -2,6 +2,7 @@ import React from 'react';
 import FillLikeIcon from '../../moon-ui/icons/FillLikeIcon';
 import OrderIcon from '../../moon-ui/icons/OrderIcon';
 import UserIcon from '../../moon-ui/icons/UserIcon';
+import AddressIcon from '../../moon-ui/icons/AddressIcon';
 import LogoutIcon from '../../moon-ui/icons/LogoutIcon';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../context/useAuthContext';
@@ -21,10 +22,15 @@ const SideBar = () => {
             icon: OrderIcon
         },
         {
-            to: 'setting',
-            title: 'Setting',
-            icon: FillLikeIcon // Assuming you wanted to use this icon here
-        }
+            to: 'addresses',
+            title: 'Adderesses',
+            icon: AddressIcon
+        },
+        // {
+        //     to: 'setting',
+        //     title: 'Setting',
+        //     icon: FillLikeIcon // Assuming you wanted to use this icon here
+        // }
     ];
 
     return (
@@ -43,7 +49,7 @@ const SideBar = () => {
                         icon: LogoutIcon
                     }} />
 
-                <div className='w-1 h-full absolute right-0 bg-gray-100 opacity-40' />
+                <div className='absolute w-full h-1 bottom-0 md:w-1 md:h-full md:right-0 bg-gray-200  opacity-40' />
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ export const partialComponent = (Component, partialProps) => {
     }
 }
 
-export const Button = ({ size, color, className, width = 'h-12 w-[15ex] md:w-[30ex] ', onClick, children, withoutWidth, isLoading = false, ...props }) => {
+export const Button = ({ size, color, className, width = 'h-13 w-[15ex] md:w-[30ex] ', onClick, children, withoutWidth, isLoading = false, ...props }) => {
     const [disabled, setDisabled] = useState()
     useEffect(() => {
         isLoading ? setDisabled('disabled') : setDisabled('')

@@ -154,8 +154,8 @@ const CheckOut = () => {
                 </div>
 
                 <Modal open={addAddressModal} onClose={() => setAddAddressModal(false)} className='gap-4 w-[40ex] md:w-[60ex] ono'>
-                    <Modal.Title>Add new address</Modal.Title>
-                    <AddressForm onClick={() => setAddAddressModal(true)} />
+                    <Modal.Title>Create Address</Modal.Title>
+                    <AddressForm onClick={() => setAddAddressModal(false)} />
                 </Modal>
 
                 <Modal open={confirmModal} onClose={() => setConfirmModal(false)} className='gap-6'>
