@@ -69,7 +69,7 @@ const AddressForm = ({ onClick }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit, onError)} noValidate className='h-full flex flex-col gap-3 w-[60ex] justify-between items-center'>
+        <form onSubmit={handleSubmit(onSubmit, onError)} noValidate className='h-full flex flex-col gap-3  justify-between items-center'>
             <FilledTextField
                 type="text"
                 id="title"

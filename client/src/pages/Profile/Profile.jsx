@@ -9,9 +9,9 @@ const Profile = () => {
         return <Navigate to='/login' />
     }
     return (
-        <div className='flex gap-7 justify-center mt-11 h-screen'>
+        <div className='flex flex-col md:flex-row gap-7 md:justify-center md:items-start items-center mt-11 min-h-screen'>
             <SideBar />
-            <div className='w-[100ex]'>
+            <div className='md:w-[120ex] w-[90%]'>
                 <Outlet />
             </div>
         </div>

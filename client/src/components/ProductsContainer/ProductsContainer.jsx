@@ -9,7 +9,7 @@ const ProductsContainer = ({ category_name = '', price = '', limit = 0, containe
 
     const { data, isFetching, isError, isLoading } = useProducts(category_name, price)
 
-    if (isLoading || isFetching) {
+    if (isLoading) {
         return <SkeletonProductContainer />
     }
 

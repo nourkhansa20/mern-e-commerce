@@ -5,6 +5,7 @@ export const addItemToCart = async (req, res) => {
     const { userId, productId, quantity, price } = req.body;
 
     try {
+
         let cart = await Cart.findOne({ user: userId });
 
         if (cart) {

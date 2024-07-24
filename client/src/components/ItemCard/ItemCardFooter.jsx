@@ -47,7 +47,7 @@ const ItemCardFooter = ({ product }) => {
                     <LikeButton className='w-[1.8ex] lg:w-[2.4ex]' />
                 </div>
             </div>
-            <Modal open={isDetailModalOpen} onClose={close} className='h-[70ex] w-11/12 sm:w-[70ex] md:w-[80ex] lg:w-[120ex] xl:w-[120ex]'>
+            <Modal open={isDetailModalOpen} onClose={close} className='h-[70ex] w-[40ex] sm:w-[70ex] md:w-[80ex] lg:w-[120ex] xl:w-[120ex] '>
                 <ProductDetails product={product} />
             </Modal>
         </div>

@@ -1,7 +1,12 @@
 // src/components/Table.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Table = ({ data = [], headers = [], rowsPerPage, unvisibleColumn = [] }) => {
+const useQueryParams = () => {
+    return new URLSearchParams(useLocation().search);
+};
+
+const Table = ({ data = [], headers = [], rowsPerPage = 5, unvisibleColumn = [], tableClassName, headerClassName = 'p-2 w-[20ex]' }) => {
     const [currentPage, setCurrentPage] = useState(1);
 
     // Ensure we have data and it's not empty
@@ -13,29 +18,41 @@ const Table = ({ data = [], headers = [], rowsPerPage, unvisibleColumn = [] }) =
 
     const totalPages = Math.ceil(data.length / rowsPerPage);
 
+    const navigate = useNavigate()
+    const query = useQueryParams();
+    const location = useLocation()
+
     const handleClick = (page) => {
+        navigate(`${location.pathname}?page=${page}`)
         setCurrentPage(page);
     };
 
+    useEffect(() => {
+        setCurrentPage(query.get('page') || '1');
+    }, [location.search]);
+
     const renderPageNumbers = () => {
         return (
-            <div>
+            <div className='flex w-full items-center justify-center gap-5 mt-3'>
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-                    <button key={number} onClick={() => handleClick(number)}>
+                    <button key={number} onClick={() => handleClick(number)}
+                        className={`${currentPage == number ? 'bg-primary' : 'bg-secondary'} text-white size-8 rounded-md transition-all duration-300 `}
+                    >
                         {number}
                     </button>
-                ))}
-            </div>
+                ))
+                }
+            </div >
         );
     };
 
     return (
         <div>
-            <table>
+            <table className={tableClassName}>
                 <thead>
                     <tr>
                         {headers.map((head, index) => (
-                            <th className='p-2 w-[20ex]' key={`${head}-${index}`}>{head}</th>
+                            <th className={`${headerClassName}`} key={`${head}-${index}`}>{head}</th>
                         ))}
                     </tr>
                 </thead>

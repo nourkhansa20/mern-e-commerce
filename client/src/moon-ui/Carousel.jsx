@@ -103,7 +103,7 @@ const Carousel = ({ images = [], baseUrl = '', interval = 10000, showGallery = f
     }
 
     return (
-        <div className={`relative ${className} h-full`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeaveCarousel}>
+        <div className={`relative ${className}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeaveCarousel}>
             {/* Main Carousel */}
             <div
                 className="relative h-full overflow-hidden"

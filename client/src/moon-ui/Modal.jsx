@@ -17,7 +17,7 @@ const Modal = ({ open = false, onClose, children, className = '' }) => {
                     <div className="fixed flex justify-center items-center w-screen h-screen z-30">
                         <div className="absolute bg-black w-screen h-screen opacity-30 z-20" onClick={close} />
                         <div
-                            className={`rounded-md transition-all duration-500 bg-white shadow-md overflow-auto ${open ? 'opacity-100' : 'opacity-0'} ${className} 
+                            className={`rounded-md transition-all duration-500 bg-white shadow-md overflow-auto ${open ? 'opacity-100' : 'opacity-0'} 
                             p-3 z-30`}
                         >
                             <div className="w-full flex justify-end cursor-pointer" onClick={close}>

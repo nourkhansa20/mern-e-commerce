@@ -35,7 +35,7 @@ const CartItem = ({ product }) => {
                     }
                     <div className='flex flex-col gap-2 w-full justify-center'>
                         <div className='text-[1.4ex] sm:text-[1.8ex] font-semibold flex justify-between items-center '>
-                            <h3 className='w-[23ex] line-clamp-2 '>{product.name}</h3>
+                            <h3 className='max-w-[23ex] line-clamp-2 '>{product.name}</h3>
                             {
                                 product.discount ? (
                                     <div className='flex gap-2'>

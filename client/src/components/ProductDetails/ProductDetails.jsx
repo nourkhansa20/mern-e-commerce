@@ -67,12 +67,12 @@ const ProductDetails = ({ product }) => {
                     showGallery
                     showIndicators={false}
                     autoPlay={false}
-                    className='w-[39ex] sm:w-[65ex] md:w-[75ex] lg:w-[60ex]'
+                    className='w-[29ex] sm:w-[65ex] md:w-[75ex] lg:w-[60ex]'
                 />
             </div>
             <div className='flex flex-col md:items-start items-center gap-4'>
                 <div className='flex gap-4 items-center'>
-                    <Link to={`../product/${currentProduct._id}`} className='text-xl md:text-2xl font-semibold w-[28ex]'>{currentProduct.name}</Link>
+                    <Link to={`../product/${currentProduct._id}`} className='text-xl md:text-2xl font-semibold md:w-[28ex]'>{currentProduct.name}</Link>
                     <LikeButton className='w-[3ex]' />
                 </div>
                 <StarRating starClassName='w-4' defaultRating={currentProduct.rate} />
