@@ -105,11 +105,11 @@ const CheckOut = () => {
 
     return (
         <>
-            <div className='flex flex-col md:flex-row m-auto md:gap-[15ex]'>
+            <div className='flex flex-col xl:flex-row m-auto xl:gap-[15ex]'>
                 <div className='md:w-[90ex]'>
                     <CartItemsList />
                 </div>
-                <div className='flex flex-col h-fit gap-5 justify-center items-center static md:sticky md:top-20 md:mt-5 '>
+                <div className='flex flex-col h-fit gap-5 justify-center items-center static md:sticky xl:top-20 xl:mt-5 '>
                     <div className='flex flex-col w-[40ex] gap-5 bg-white p-5 shadow-md h-fit rounded-md'>
                         <h2 className='font-semibold text-3xl '>Summary</h2>
                         <table className='w-full'>
@@ -158,7 +158,7 @@ const CheckOut = () => {
                     </form>
                 </div>
 
-                <Modal open={addAddressModal} onClose={() => setAddAddressModal(false)} className='gap-4 w-[40ex] md:w-[60ex] ono'>
+                <Modal open={addAddressModal} onClose={() => setAddAddressModal(false)} className='gap-4 w-[40ex] xl:w-[60ex] '>
                     <Modal.Title>Create Address</Modal.Title>
                     <AddressForm onClick={() => setAddAddressModal(false)} />
                 </Modal>

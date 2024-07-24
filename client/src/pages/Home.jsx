@@ -4,12 +4,11 @@ import Carousel from '../moon-ui/Carousel'
 import Services from '../components/Services/Services'
 import TextOffer from '../components/TextOffer/TextOffer'
 import BannerHome from '../components/BannersHome/BannerHome'
+import { useCategories } from '../hooks/useCategoryApi'
 import Tab from '../moon-ui/Tab'
 import CustomTab from '../components/CustomTab/CustomTab'
-import { useCategories } from '../hooks/useCategoryApi'
-import ProductsContainer from '../components/ProductsContainer/ProductsContainer'
 import { capitalizeFirstLetter } from '../helpers/wordhelper'
-import SideFilter from '../moon-ui/SideFilter'
+import ProductsContainer from '../components/ProductsContainer/ProductsContainer'
 
 const Home = () => {
   const { data: categories, isLoading, isError, isFetching } = useCategories()
@@ -26,7 +25,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='h-[16ex] sm:h-[30ex] md:h-[40ex] lg:h-[50ex] xl:h-[70%] mb-7'>
+      <div className='h-[16ex] sm:h-[30ex] md:h-[40ex] lg:h-[50ex] xl:h-[70%] mb-4'>
         <Carousel images={images} autoPlay={true} />
       </div>
 
@@ -58,11 +57,11 @@ const Home = () => {
         {/* <CustomTab
           saparator={'/'}
           content='Typi non habent claritatem insitam est usus legentis in qui facit eorum claritatem, investigationes demonstraverunt lectores legere me lius quod legunt saepius.'
-        > */}
-        {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
-        {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
-        {/* <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child> */}
-        {/* </CustomTab> */}
+        >
+        <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={3} /></Tab.child>
+        <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={2} /></Tab.child>
+        <Tab.child title={capitalizeFirstLetter('')}><ProductsContainer  limit={5} /></Tab.child>
+        </CustomTab> */}
 
       </div>
     </>

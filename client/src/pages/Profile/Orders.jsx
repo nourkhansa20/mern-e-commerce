@@ -49,10 +49,10 @@ const Orders = () => {
             <div className='mb-5 flex justify-between'>
                 <h2 className='text-4xl font-semibold'>Orders</h2>
             </div>
-            <div className='hidden md:block'>
+            <div className='hidden lg:block'>
                 <Table headers={headres} data={tableOrders} rowsPerPage={20} unvisibleColumn={'0'} headerClassName='text-[1.7ex] p-2' tableClassName={'w-full'} />
             </div>
-            <div className='flex flex-col gap-3 md:hidden '>
+            <div className='flex flex-col gap-3 lg:hidden '>
                 {
                     tableOrders.map((order) => (
                         <div className='flex justify-around rounded-md border-[1px] border-gray-200 px-5 py-3'>

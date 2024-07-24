@@ -150,19 +150,21 @@ const Carousel = ({ images = [], baseUrl = '', interval = 10000, showGallery = f
                     </div>
                 )}
             </div>
-            <hr className='mt-2' />
             {/* Image Gallery Preview */}
             {showGallery && (
-                <div className="flex justify-center max-w-full items-center mt-4 space-x-2 overflow-auto ">
-                    {images.map((image, index) => (
-                        <img
-                            src={`${baseUrl}${image}`}
-                            key={index}
-                            className="min-w-20 h-20 object-contain cursor-pointer"
-                            onClick={() => handleImageClick(index)}
-                        />
-                    ))}
-                </div>
+                <>
+                    <hr className='mt-2' />
+                    <div className="flex justify-center max-w-full items-center mt-4 space-x-2 overflow-auto ">
+                        {images.map((image, index) => (
+                            <img
+                                src={`${baseUrl}${image}`}
+                                key={index}
+                                className="min-w-20 h-20 object-contain cursor-pointer"
+                                onClick={() => handleImageClick(index)}
+                            />
+                        ))}
+                    </div>
+                </>
             )}
         </div>
     );
