@@ -39,12 +39,13 @@ const Home = () => {
           categories.map((category, index) => (
             <>
               {
-                index == 3 && (<TextOffer>
-                  Today Offer: $20 OFF orders $300 or more with code
-                  <TextOffer.Highligth> “SNEAKER-002”</TextOffer.Highligth>
-                  + Free shipping on orders over $60!
-                  <TextOffer.Highligth> Offer Details</TextOffer.Highligth>
-                </TextOffer>)
+                index == 3 && (
+                  <TextOffer key={index}>
+                    Today Offer: $20 OFF orders $300 or more with code
+                    <TextOffer.Highligth> “SNEAKER-002”</TextOffer.Highligth>
+                    + Free shipping on orders over $60!
+                    <TextOffer.Highligth> Offer Details</TextOffer.Highligth>
+                  </TextOffer>)
               }
 
               <ProductSection category={category} />

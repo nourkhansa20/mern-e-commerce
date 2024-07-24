@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../context/useAuthContext';
 import { getAllCartItemsFromLocalStorage } from '../../../helpers/localStorageHelper';
 import { useAddMultipleItemsToCart } from '../../../hooks/useCartApi';
+import { useLocalStorageContext } from '../../../context/LocalStorageContext';
 
 const schema = yup.object({
     username: yup.string().required("Username is required"),
@@ -17,6 +18,7 @@ const schema = yup.object({
 const LoginFrom = () => {
     const { loginMutation, setUser, setToken, loadingAuth } = useAuthContext()
     const [isLoading, setIsLoading] = useState(false)
+    const { clearCart } = useLocalStorageContext()
     const navigate = useNavigate()
 
     const addMultiProductToCartMutation = useAddMultipleItemsToCart()
@@ -35,29 +37,38 @@ const LoginFrom = () => {
 
     const onSubmit = async (data) => {
         setIsLoading(true)
-        await loginMutation.mutateAsync(data, {
-            onSuccess: (data) => {
-                setUser(data.data.user)
-                setToken(data.data.token)
-                setIsLoading(false)
-                const products = getAllCartItemsFromLocalStorage()
-                if (products.length > 0) {
-                    addMultiProductToCartMutation.mutate({ userId: data.data.user._id, products }, {
-                        onSuccess: () => {
-                            console.log('Add products to the cart succ..')
-                        },
-                        onError: (err) => {
-                            console.log('Error add prod to cart', err)
-                        }
-                    })
+        try {
+            await loginMutation.mutateAsync(data, {
+                onSuccess: async (data) => {
+                    console.log("get Prig")
+                    const products = getAllCartItemsFromLocalStorage()
+                    console.log(products)
+                    if (products.length > 0) {
+                        await addMultiProductToCartMutation.mutateAsync({ userId: data.data.user._id, products }, {
+                            onSuccess: () => {
+                                console.log('Add products to the cart succ..')
+                                setIsLoading(false)
+                                clearCart()
+                            },
+                            onError: (err) => {
+                                console.log('Error add prod to cart', err)
+                                setIsLoading(false)
+                            }
+                        })
+                    }
+                    setUser(data.data.user)
+                    setToken(data.data.token)
+                },
+                onError: (error) => {
+                    console.error('Error posting data:', error);
+                    setIsLoading(false)
+                    alert(error)
                 }
+            });
+        } catch (error) {
+            console.log(error)
+        }
 
-                // navigate('/home')
-            },
-            onError: (error) => {
-                console.error('Error posting data:', error);
-            }
-        });
     }
 
     const onError = (data) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import FillLikeIcon from '../../moon-ui/icons/FillLikeIcon';
 import OrderIcon from '../../moon-ui/icons/OrderIcon';
 import UserIcon from '../../moon-ui/icons/UserIcon';
 import AddressIcon from '../../moon-ui/icons/AddressIcon';

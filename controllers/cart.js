@@ -32,6 +32,7 @@ export const addItemToCart = async (req, res) => {
 // Add multiple items to cart
 export const addMultipleItemsToCart = async (req, res) => {
     const { userId, products } = req.body; // products is an array of { productId, quantity, price }
+    console.log("add multi")
     console.log(userId)
     console.log(products)
     try {
@@ -41,11 +42,11 @@ export const addMultipleItemsToCart = async (req, res) => {
         }
 
         products.forEach(product => {
-            const itemIndex = cart.items.findIndex(item => item.product.toString() === product._id);
+            const itemIndex = cart.items.findIndex(item => item.product.toString() === product.product._id);
             if (itemIndex > -1) {
                 cart.items[itemIndex].quantity += product.quantity;
             } else {
-                cart.items.push({ product: product._id, quantity: product.quantity, price: product.price });
+                cart.items.push({ product: product.product._id, quantity: product.quantity, price: product.product.price });
             }
         });
 

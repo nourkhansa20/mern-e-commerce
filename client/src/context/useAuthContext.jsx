@@ -48,6 +48,8 @@ export const AuthContextProvider = ({ children }) => {
     const logout = () => {
         _logout()
         setIsAuth(false)
+        setUser('')
+        setToken('')
     }
 
     const [token, _setToken] = useState(getItemToLocalStorage('ACCESS_TOKEN'))
@@ -55,6 +57,7 @@ export const AuthContextProvider = ({ children }) => {
     const loginMutation = useMutation(login)
 
     const setUser = (user) => {
+        console.log("first")
         _setUser(user)
         const userString = JSON.stringify(user);
         addItemToLocalStorage('USER', userString)

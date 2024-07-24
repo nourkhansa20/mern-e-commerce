@@ -12,13 +12,21 @@ import * as yup from 'yup'
 import { useToast } from '../moon-ui/Toast'
 import { useCreateOrder } from '../hooks/useOrderApi.js'
 import { useRemoveAllItemsFromCart } from '../hooks/useCartApi.js'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const schema = yup.object({
     address: yup.string().required("Address is required"),
 })
 
 const CheckOut = () => {
+
+    const { isAuth, user } = useAuthContext()
+    const navigate = useNavigate()
+
+    if (!isAuth) {
+        return <Navigate to='/home' />
+    }
+
     const { cartProducts, total, subTotal, totalDiscount } = useCartContext()
     const [addAddressModal, setAddAddressModal] = useState(false)
     const [confirmModal, setConfirmModal] = useState(false)
@@ -29,9 +37,6 @@ const CheckOut = () => {
     const createOrderMutation = useCreateOrder()
     const removeAllItemFromCart = useRemoveAllItemsFromCart()
 
-    const navigate = useNavigate()
-
-    const { user } = useAuthContext()
 
     const addToast = useToast()
 

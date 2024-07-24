@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { addProductToLocalStorageCart, checkIfProductInLocalStorageCart, deleteProductFromLocalStorageCart, getAllCartItemsFromLocalStorage, getProductQuantityFromLocalStorage, removeProductToLocalStorageCart } from "../helpers/localStorageHelper";
+import { addProductToLocalStorageCart, checkIfProductInLocalStorageCart, deleteProductFromLocalStorageCart, getAllCartItemsFromLocalStorage, getProductQuantityFromLocalStorage, removeProductToLocalStorageCart, clearProductCartFromLocalStorage } from "../helpers/localStorageHelper";
 
 const LocalStorageContext = createContext({
   products: null,
@@ -8,6 +8,7 @@ const LocalStorageContext = createContext({
   isProductExist: () => { },
   getProductQuantity: () => { },
   deleteProduct: () => { },
+  clearCart: () => { },
 })
 
 export const LocalStorageContextProvider = ({ children }) => {
@@ -39,6 +40,10 @@ export const LocalStorageContextProvider = ({ children }) => {
     return checkIfProductInLocalStorageCart(product_id)
   }
 
+  const clearCart = () => {
+    clearProductCartFromLocalStorage()
+  }
+
   return (
     <LocalStorageContext.Provider value={{
       products,
@@ -47,6 +52,7 @@ export const LocalStorageContextProvider = ({ children }) => {
       isProductExist,
       getProductQuantity,
       deleteProduct,
+      clearCart
     }}>
       {children}
     </LocalStorageContext.Provider>

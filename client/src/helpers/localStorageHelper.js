@@ -6,7 +6,7 @@ export function getAllCartItemsFromLocalStorage() {
 export function addProductToLocalStorageCart(product) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const productIndex = cart.findIndex(item => item.product._id === product.product._id);
-    console.log( cart)
+    console.log(cart)
     if (productIndex !== -1) {
         cart[productIndex].quantity += 1;
     } else {
@@ -45,6 +45,11 @@ export function deleteProductFromLocalStorageCart(product_id) {
 
     localStorage.setItem('cart', JSON.stringify(cart));
     return cart
+}
+
+export function clearProductCartFromLocalStorage() {
+    localStorage.removeItem('cart');
+
 }
 
 export function checkIfProductInLocalStorageCart(product_id) {
