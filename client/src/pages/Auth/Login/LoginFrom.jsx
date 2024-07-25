@@ -4,7 +4,6 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { FilledTextField } from '../../../moon-ui/TextField';
 import { PrimaryButton } from '../../../moon-ui/Buttons';
-import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../context/useAuthContext';
 import { getAllCartItemsFromLocalStorage } from '../../../helpers/localStorageHelper';
 import { useAddMultipleItemsToCart } from '../../../hooks/useCartApi';
@@ -19,7 +18,6 @@ const LoginFrom = () => {
     const { loginMutation, setUser, setToken, loadingAuth } = useAuthContext()
     const [isLoading, setIsLoading] = useState(false)
     const { clearCart } = useLocalStorageContext()
-    const navigate = useNavigate()
 
     const addMultiProductToCartMutation = useAddMultipleItemsToCart()
 
@@ -40,18 +38,14 @@ const LoginFrom = () => {
         try {
             await loginMutation.mutateAsync(data, {
                 onSuccess: async (data) => {
-                    console.log("get Prig")
                     const products = getAllCartItemsFromLocalStorage()
-                    console.log(products)
                     if (products.length > 0) {
                         await addMultiProductToCartMutation.mutateAsync({ userId: data.data.user._id, products }, {
                             onSuccess: () => {
-                                console.log('Add products to the cart succ..')
                                 setIsLoading(false)
                                 clearCart()
                             },
                             onError: (err) => {
-                                console.log('Error add prod to cart', err)
                                 setIsLoading(false)
                             }
                         })

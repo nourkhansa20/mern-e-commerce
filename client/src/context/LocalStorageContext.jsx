@@ -42,6 +42,7 @@ export const LocalStorageContextProvider = ({ children }) => {
 
   const clearCart = () => {
     clearProductCartFromLocalStorage()
+    setProducts([])
   }
 
   return (

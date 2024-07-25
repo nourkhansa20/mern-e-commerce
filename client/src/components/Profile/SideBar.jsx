@@ -48,7 +48,7 @@ const SideBar = () => {
                         icon: LogoutIcon
                     }} />
 
-                <div className='absolute w-full h-1 bottom-0 md:w-1 md:h-full md:right-0 bg-gray-200  opacity-40' />
+                <div className='absolute w-full h-1 -bottom-0 md:w-1 md:h-full md:right-0 bg-gray-200  opacity-40' />
             </div>
         </div>
     );

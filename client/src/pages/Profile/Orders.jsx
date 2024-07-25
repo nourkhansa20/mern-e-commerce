@@ -3,13 +3,18 @@ import Table from '../../moon-ui/Table'
 import { useAuthContext } from '../../context/useAuthContext'
 import { useOrdersByUserId } from '../../hooks/useOrderApi'
 import { PrimaryButton } from '../../moon-ui/Buttons'
+import { useNavigate } from 'react-router-dom'
 
 const Orders = () => {
 
     const { user } = useAuthContext()
+    const navigate = useNavigate()
     const { data: orders, isLoading: isOrdersLoading, error: ordersError } = useOrdersByUserId(user._id)
     const [tableOrders, setTableOrders] = useState([])
 
+    const openOrder = (orderID) => {
+        navigate( orderID )
+    }
 
     useEffect(() => {
         if (orders) {
@@ -28,15 +33,17 @@ const Orders = () => {
 
                 let totalString = '$ ' + totalPrice
 
-                let button = <PrimaryButton className={'text-sm '} width='w-fit'>Show </PrimaryButton>
+                let button = <PrimaryButton className={'text-sm '} onClick={() => openOrder(_id)} width=''> Show </PrimaryButton >
 
-                return { _id, address, paymentMethod, orderItemsLength, isDeliveredComponent, isPaidComponent, totalString, /*button */ }
+                return { _id, address, paymentMethod, orderItemsLength, isDeliveredComponent, isPaidComponent, totalString, button }
 
             });
             setTableOrders(newOrdersArray);
         }
 
     }, [orders])
+
+
 
     if (isOrdersLoading) {
         return <div>Loading...</div>
@@ -55,7 +62,7 @@ const Orders = () => {
             <div className='flex flex-col gap-3 lg:hidden '>
                 {
                     tableOrders.map((order) => (
-                        <div className='flex justify-around rounded-md border-[1px] border-gray-200 px-5 py-3'>
+                        <div className='flex justify-around rounded-md border-[1px] border-gray-200 px-5 py-3' onClick={() => openOrder(order._id)}>
                             <table className='text-center text-sm'>
                                 <tbody>
                                     <tr>

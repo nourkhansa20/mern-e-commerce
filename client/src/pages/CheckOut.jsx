@@ -13,6 +13,7 @@ import { useToast } from '../moon-ui/Toast'
 import { useCreateOrder } from '../hooks/useOrderApi.js'
 import { useRemoveAllItemsFromCart } from '../hooks/useCartApi.js'
 import { Navigate, useNavigate } from 'react-router-dom'
+import Invoice from '../components/Invoice/Invoice.jsx'
 
 const schema = yup.object({
     address: yup.string().required("Address is required"),
@@ -36,7 +37,6 @@ const CheckOut = () => {
 
     const createOrderMutation = useCreateOrder()
     const removeAllItemFromCart = useRemoveAllItemsFromCart()
-
 
     const addToast = useToast()
 
@@ -105,12 +105,13 @@ const CheckOut = () => {
 
     return (
         <>
-            <div className='flex flex-col xl:flex-row m-auto xl:gap-[15ex]'>
-                <div className='md:w-[90ex]'>
-                    <CartItemsList />
+            <div className='flex flex-col w-full xl:flex-row m-auto xl:gap-[15ex] p-4'>
+                <div className='md:w-[90ex] w-full  mb-12 mt-5 xl:mb-0'>
+                    {/* <CartItemsList /> */}
+                    <Invoice products={cartProducts} />
                 </div>
                 <div className='flex flex-col h-fit gap-5 justify-center items-center static md:sticky xl:top-20 xl:mt-5 '>
-                    <div className='flex flex-col w-[40ex] gap-5 bg-white p-5 shadow-md h-fit rounded-md'>
+                    <div className='flex flex-col w-[40ex] gap-5 rounded-md border-[1px] border-gray-200 px-5 py-3 h-fit '>
                         <h2 className='font-semibold text-3xl '>Summary</h2>
                         <table className='w-full'>
                             <tbody>
@@ -135,7 +136,7 @@ const CheckOut = () => {
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit, onError)} noValidate className='flex flex-col justify-center items-center gap-3'>
-                        <div className='flex flex-col w-[40ex] gap-5 bg-white p-5 shadow-md h-fit rounded-md'>
+                        <div className='flex flex-col w-[40ex] gap-5 bg-white border-[1px] border-gray-200 px-5 py-3 '>
                             <div className='flex justify-between '>
                                 <h2 className='font-semibold text-3xl '>Address</h2>
                                 <PrimaryButton type="button" className={'text-sm '} width='w-fit' onClick={() => setAddAddressModal(true)}>Add address</PrimaryButton>
