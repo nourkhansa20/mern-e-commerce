@@ -12,11 +12,11 @@ const CustomBar = () => {
     return (
         <Bar className='sticky top-0'>
             <Bar.Items withoutDirection className="flex justify-start">
-                <Bar.Item to='/home' className='text-white hover:text-primary transition-all duration-200'>
+                <Bar.Item to='/ecommerce/home' className='text-white hover:text-primary transition-all duration-200'>
                     <Bar.ItemText>HOME</Bar.ItemText>
                 </Bar.Item>
 
-                <Bar.Item to={'/shop'} className='text-white hover:text-primary transition-all duration-200'>
+                <Bar.Item to={'/ecommerce/shop'} className='text-white hover:text-primary transition-all duration-200'>
                     <Bar.ItemText>SHOP</Bar.ItemText>
                 </Bar.Item>
             </Bar.Items>
@@ -30,14 +30,14 @@ const CustomBar = () => {
                 {
                     isAuth ?
                         (
-                            <Bar.Item to={'/profile/user-info'} className=''>
+                            <Bar.Item to={'/ecommerce/profile/user-info'} className=''>
                                 <Bar.ItemText>
                                     <UserIcon className='w-7 fill-white hover:fill-primary transition-all duration-300' />
                                 </Bar.ItemText>
                             </Bar.Item>
 
                         ) : (
-                            <Bar.Item to={'/login'} className=''>
+                            <Bar.Item to={'ecommerce/login'} className=''>
                                 <Bar.ItemText className='text-white'>
                                     Login
                                 </Bar.ItemText>
