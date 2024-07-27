@@ -11,7 +11,10 @@ const secretKey = 'your_jwt_secret_key'; // Use a strong secret key in productio
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await User.findOne({ username }).populate('addresses');
+    const user = await User.findOne({ username }).populate({
+      path: 'addresses',
+      match: { deleted: 0 }
+    });;
 
     if (!user) {
       return res.status(401).send('No user with that username');

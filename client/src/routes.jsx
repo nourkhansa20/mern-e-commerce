@@ -27,7 +27,7 @@ const SuspenseFallback = () => <div>Loading...</div>;
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/ecommerce',
         element: <DefaultLayout />,
         children: [
             {
@@ -121,7 +121,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/',
+        path: '/ecommerce',
         element: <GuestLayout />,
         children: [
             {
@@ -135,7 +135,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/admin',
+        path: '/ecommerce/admin',
         element: <BackOfficeLayout />,
         children: [
             {

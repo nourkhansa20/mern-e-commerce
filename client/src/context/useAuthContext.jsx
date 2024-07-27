@@ -57,7 +57,6 @@ export const AuthContextProvider = ({ children }) => {
     const loginMutation = useMutation(login)
 
     const setUser = (user) => {
-        console.log("first")
         _setUser(user)
         const userString = JSON.stringify(user);
         addItemToLocalStorage('USER', userString)
