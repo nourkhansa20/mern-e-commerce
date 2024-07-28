@@ -25,7 +25,7 @@ const CheckOut = () => {
     const navigate = useNavigate()
 
     if (!isAuth) {
-        return <Navigate to='/ecommerce/home' />
+        return <Navigate to='/home' />
     }
 
     const { cartProducts, total, subTotal, totalDiscount } = useCartContext()
@@ -85,7 +85,7 @@ const CheckOut = () => {
             onSuccess: (data) => {
                 removeAllItemFromCart.mutateAsync(user._id, {
                     onSuccess: (data) => {
-                        navigate('/ecommerce/home')
+                        navigate('/home')
                         setIsOrderLoading(false)
 
                     },

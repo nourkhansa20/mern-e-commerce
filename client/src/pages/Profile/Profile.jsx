@@ -6,7 +6,7 @@ import { useAuthContext } from '../../context/useAuthContext'
 const Profile = () => {
     const { isAuth } = useAuthContext()
     if (!isAuth) {
-        return <Navigate to='/ecommerce/login' />
+        return <Navigate to='/login' />
     }
     return (
         <div className='flex flex-col md:flex-row gap-7 md:justify-center md:items-start items-center mt-11 min-h-screen'>

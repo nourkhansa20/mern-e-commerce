@@ -14,9 +14,9 @@ const Cart = ({ closeDrawer }) => {
 
     const goToCheckOut = () => {
         if (isAuth) {
-            navigate('ecommerce/check-out')
+            navigate('check-out')
         } else {
-            navigate('ecommerce/login')
+            navigate('login')
 
         }
         closeDrawer()
