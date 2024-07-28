@@ -1,11 +1,11 @@
-import cookieParser from 'cookie-parser'
-import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import cors from 'cors'
-import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
-import authenticateJWT from './middleware/authMiddleware.js'
+import authenticateJWT from './middleware/authMiddleware.js';
 import passport from './config/passport-config.js'; // Correct the path
 
 import authRoutes from './routes/auth.js'; // Correct the path
@@ -17,26 +17,26 @@ import cartRoutes from './routes/cart.js'; // Correct the path
 import addressRoutes from './routes/address.js'; // Correct the path
 import orderRoutes from './routes/orders.js'; // Correct the path
 
-import './database/database.js'
+import './database/database.js';
 
-import { adminRouter, admin } from './adminjs/adminJS.js'
+import { adminRouter, admin } from './adminjs/adminJS.js';
 
-dotenv.config()
+dotenv.config();
 
-// Resolving dirnanme for ES module
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+// Resolving dirname for ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const app = express()
-const PORT = 3000
+const app = express();
+const PORT = 3000;
 
-//midleware for passport js
+// Middleware for passport.js
 app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
-app.use(express.json())
-app.use(cors())
-app.use(cookieParser())
+app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
@@ -48,19 +48,19 @@ app.use('/api/addresses', addressRoutes);
 app.use('/api/orders', orderRoutes);
 
 // Use the Client app
-app.use(express.static(path.join(__dirname, '/client/dist')))
+app.use('/', express.static(path.join(__dirname, 'client/dist')));
 
-// To access te images
+// To access the images
 app.use('/images', express.static(path.join(__dirname, '/images')));
 
 // Use admin js
-// app.use(admin.options.rootPath, adminRouter)
+// app.use(admin.options.rootPath, adminRouter);
 
 // Render client for any path
 app.get('/ecommerce/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/dist/index.html'))
-})
+    res.sendFile(path.join(__dirname, 'client/dist/index.html'));
+});
 
 app.listen(PORT, () => {
-    console.log("Server run at port 3000")
-})
+    console.log(`Server running at port ${PORT}`);
+});
