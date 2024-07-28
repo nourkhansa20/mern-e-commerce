@@ -48,7 +48,7 @@ app.use('/api/addresses', addressRoutes);
 app.use('/api/orders', orderRoutes);
 
 // Use the Client app
-app.use('/', express.static(path.join(__dirname, 'client/dist')));
+app.use('/ecommerce', express.static(path.join(__dirname, 'client/dist')));
 
 // To access the images
 app.use('/images', express.static(path.join(__dirname, '/images')));
