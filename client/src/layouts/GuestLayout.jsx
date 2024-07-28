@@ -6,7 +6,7 @@ const GuestLayout = () => {
     const { isAuth } = useAuthContext()
 
     if (isAuth) {
-        return <Navigate to={'/ecommerce/home'} />
+        return <Navigate to={'/home'} />
     }
 
     return (

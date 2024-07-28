@@ -72,7 +72,7 @@ const ProductForm = ({ onClick }) => {
                     uploadImageMutation.mutate({ id: data._id, images }, {
                         onSuccess: (data) => {
                             addToast("Product added successfully", 'success', 2000)
-                            navigate('/ecommerce/admin/products')
+                            navigate('/admin/products')
                             setIsLoading(false)
                             onClick()
                         },

@@ -48,7 +48,7 @@ const ShopPage = () => {
     ];
 
     const getFilter = (data) => {
-        navigate(`/ecommerce/shop?${data.query_params.toLowerCase()}`);
+        navigate(`/shop?${data.query_params.toLowerCase()}`);
         setCategoryName(data.json.category[0]);
     }
 
