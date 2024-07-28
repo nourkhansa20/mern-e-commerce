@@ -38,14 +38,14 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', usersRoutes);
-app.use('/api/products', productsRoutes);
-app.use('/api/categories', categoriesRoutes);
-app.use('/api/fields', fieldsRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/addresses', addressRoutes);
-app.use('/api/orders', orderRoutes);
+app.use('/ecommerce/api/auth', authRoutes);
+app.use('/ecommerce/api/users', usersRoutes);
+app.use('/ecommerce/api/products', productsRoutes);
+app.use('/ecommerce/api/categories', categoriesRoutes);
+app.use('/ecommerce/api/fields', fieldsRoutes);
+app.use('/ecommerce/api/cart', cartRoutes);
+app.use('/ecommerce/api/addresses', addressRoutes);
+app.use('/ecommerce/api/orders', orderRoutes);
 
 // Use the Client app
 app.use('/ecommerce', express.static(path.join(__dirname, 'client/dist')));
