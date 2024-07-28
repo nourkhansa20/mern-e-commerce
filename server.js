@@ -57,7 +57,7 @@ app.use('/images', express.static(path.join(__dirname, '/images')));
 // app.use(admin.options.rootPath, adminRouter)
 
 // Render client for any path
-app.get('*', (req, res) => {
+app.get('/ecommerce/*', (req, res) => {
     res.sendFile(path.join(__dirname, '/client/dist/index.html'))
 })
 
