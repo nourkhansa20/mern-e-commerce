@@ -27,15 +27,16 @@ const SuspenseFallback = () => <div>Loading...</div>;
 
 const router = createBrowserRouter([
     {
-        path: '/ecommerce',
+
+        path: '/',
         element: <DefaultLayout />,
         children: [
             {
-                path: '/',
-                element: <Navigate to={'/home'} />,
+                path: '/ecommerce',
+                element: <Navigate to={'../ecommerce/home'} />,
             },
             {
-                path: 'home',
+                path: 'ecommerce/home',
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <Home />
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: 'product/:product_slug',
+                path: 'ecommerce/product/:product_slug',
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <ProductPage />
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: 'shop',
+                path: 'ecommerce/shop',
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <ShopPage />
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: 'check-out',
+                path: 'ecommerce/check-out',
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <CheckOut />
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
             },
             {
 
-                path: '/profile/orders/:order_id',
+                path: 'ecommerce/profile/orders/:order_id',
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <Order />
@@ -77,7 +78,7 @@ const router = createBrowserRouter([
 
             },
             {
-                path: 'profile',
+                path: 'ecommerce/profile',
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <Profile />
@@ -121,11 +122,11 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/ecommerce',
+        path: '/',
         element: <GuestLayout />,
         children: [
             {
-                path: 'login', // Corrected path
+                path: 'ecommerce/login', // Corrected path
                 element: (
                     <Suspense fallback={<SuspenseFallback />}>
                         <Login />
@@ -135,7 +136,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/ecommerce/admin',
+        path: 'ecommerce/admin',
         element: <BackOfficeLayout />,
         children: [
             {

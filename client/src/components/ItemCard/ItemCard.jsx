@@ -24,7 +24,7 @@ const ItemCard = ({ product }) => {
                         />
                         <StarRating starClassName='size-4' defaultRating={product.rate} />
                         <hr />
-                        <Link to={`../product/${product._id}`} className='text-sm lg:text-md font-semibold h-11 line-clamp-2 hover:text-primary transition-all duration-300'>{product.name}</Link>
+                        <Link to={`../ecommerce/product/${product._id}`} className='text-sm lg:text-md font-semibold h-11 line-clamp-2 hover:text-primary transition-all duration-300'>{product.name}</Link>
                         <div />
                         <ItemCardDescription product={product} />
                         <ItemCardFooter product={product} />
