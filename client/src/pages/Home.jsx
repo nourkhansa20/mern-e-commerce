@@ -35,7 +35,7 @@ const Home = () => {
         <BannerHome />
 
         {
-          categories.length > 0 (
+          categories.length > 0 && (
             categories.map((category, index) => (
               <>
                 {
