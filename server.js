@@ -51,7 +51,7 @@ app.use('/ecommerce/api/orders', orderRoutes);
 app.use('/ecommerce', express.static(path.join(__dirname, 'client/dist')));
 
 // To access the images
-app.use('/images', express.static(path.join(__dirname, '/images')));
+app.use('/ecommerce/images', express.static(path.join(__dirname, '/images')));
 
 // Use admin js
 // app.use(admin.options.rootPath, adminRouter);
