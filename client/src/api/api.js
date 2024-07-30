@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosParams = {
   baseURL:
-    `${import.meta.env.VITE_API_BASE_URL}/api`
+    `${import.meta.env.VITE_API_BASE_URL}/ecommerce/api`
 };
 
 const axiosInstance = axios.create(axiosParams);

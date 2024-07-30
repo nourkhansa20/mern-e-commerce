@@ -23,8 +23,8 @@ const LoginFrom = () => {
 
     const form = useForm({
         defaultValues: {
-            username: '',
-            password: '',
+            username: 'admin',
+            password: 'admin',
         },
         resolver: yupResolver(schema)
     })
@@ -75,6 +75,7 @@ const LoginFrom = () => {
             <FilledTextField
                 type="text"
                 id="username"
+                defaultValue={'admin'}
                 label="Username"
                 error={errors.username?.message}
                 {...register('username')}
@@ -83,6 +84,7 @@ const LoginFrom = () => {
                 type="password"
                 id="password"
                 label="Password"
+                defaultValue={'admin'}
                 error={errors.password?.message}
                 {...register('password')}
             />
