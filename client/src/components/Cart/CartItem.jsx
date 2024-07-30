@@ -10,7 +10,7 @@ import { useCartContext } from '../../context/CartContext'
 const CartItem = ({ product }) => {
     const { addProductToCart, removeProductFromCart, getProductQuantity, deleteProductFromCart } = useCartContext()
     const quantity = getProductQuantity(product._id);
-    const productPriceAfterDiscount = parseFloat(product.price) - parseFloat(product.discount.amount)
+    const productPriceAfterDiscount = Number(parseFloat(product.price) - parseFloat(product.discount.amount)).toFixed(2)
 
     const handleAdd = () => {
         addProductToCart(product)
@@ -37,13 +37,13 @@ const CartItem = ({ product }) => {
                         <div className='text-[1.4ex] sm:text-[1.8ex] font-semibold flex justify-between items-center '>
                             <h3 className='max-w-[23ex] line-clamp-2 '>{product.name}</h3>
                             {
-                                product.discount ? (
+                                product.discount.amount > 0 ? (
                                     <div className='flex gap-2'>
                                         <span className='font-semibold text-gray-400 line-through'>${product.price}</span>
                                         <span>${productPriceAfterDiscount}</span>
                                     </div>
                                 ) : (
-                                    product.price && <p>${product.price}</p>
+                                    product.price && <p>${Number(product.price).toFixed(2)}</p>
                                 )
                             }
                         </div>

@@ -54,7 +54,7 @@ const Home = () => {
           )
         }
 
-        <ProductSection category={categories[1]} />
+        {/* <ProductSection category={categories[1]} /> */}
 
         {/* <CustomTab
           saparator={'/'}

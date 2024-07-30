@@ -19,7 +19,7 @@ const Invoice = ({ products, tableRow }) => {
               <tr className='border-b-[1px] '>
                 <td className='p-3 text-center'>{product.product.name}</td>
                 <td className='p-3 text-center'>{product.quantity}</td>
-                <td className='p-3 text-center'>${product.price}</td>
+                <td className='p-3 text-center'>${Number(product.price).toFixed(2)}</td>
                 <td className='p-3 text-center'>${Number(product.price * product.quantity).toFixed(2)}</td>
 
               </tr>

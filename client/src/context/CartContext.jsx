@@ -49,9 +49,9 @@ export const CartContextProvider = ({ children }) => {
 
         total = subTotal - totalDiscount
 
-        setSubtotal(subTotal)
-        setTotal(total)
-        setTotalDiscount(totalDiscount)
+        setSubtotal(Number(subTotal).toFixed(2))
+        setTotal(Number(total).toFixed(2))
+        setTotalDiscount(Number(totalDiscount).toFixed(2))
 
     }, [cartProducts])
 

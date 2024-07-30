@@ -2,9 +2,9 @@ import React from 'react'
 
 const ItemCardDescription = ({ product }) => {
 
-    const discountAmount = product.price - product.discount.amount
+    const discountAmount = Number(product.price - product.discount.amount).toFixed(2)
 
-    if (product.discount) {
+    if (product.discount.amount > 0) {
         return (
             <div className='flex gap-4'>
                 <div className='text-sm lg:text-lg font-semibold'>${discountAmount}</div>
@@ -14,7 +14,7 @@ const ItemCardDescription = ({ product }) => {
     }
     return (
         <div className='flex gap-4'>
-            <div className='text-sm lg:text-lg font-semibold'>${product.price}</div>
+            <div className='text-sm lg:text-lg font-semibold'>${Number(product.price).toFixed(2)}</div>
         </div>
     )
 }
